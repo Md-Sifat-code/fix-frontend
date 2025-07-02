@@ -1,18 +1,33 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import Layout from "@/components/Layout"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { BarChart, Calendar, FileImage, FileText, Filter, PlusCircle, Search, TrendingUp } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import Layout from "@/components/Layout";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  BarChart,
+  Calendar,
+  FileImage,
+  FileText,
+  Filter,
+  PlusCircle,
+  Search,
+  TrendingUp,
+} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 export default function MediaPage() {
-  const [searchQuery, setSearchQuery] = useState("")
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <Layout>
@@ -20,7 +35,9 @@ export default function MediaPage() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <div>
             <h1 className="text-3xl font-light mb-2">Media Center</h1>
-            <p className="text-gray-600">Manage, publish, and analyze your firm's media content</p>
+            <p className="text-gray-600">
+              Manage, publish, and analyze your firm's media content
+            </p>
           </div>
 
           <div className="flex space-x-2">
@@ -109,7 +126,8 @@ export default function MediaPage() {
                     <Calendar className="h-16 w-16 text-gray-400 mb-4" />
                     <p className="text-lg font-medium">Content Calendar</p>
                     <p className="text-gray-500 text-center max-w-md mt-2">
-                      Plan, schedule, and organize your media content with the integrated content calendar.
+                      Plan, schedule, and organize your media content with the
+                      integrated content calendar.
                     </p>
                   </div>
                 </div>
@@ -161,7 +179,8 @@ export default function MediaPage() {
                     <BarChart className="h-16 w-16 text-gray-400 mb-4" />
                     <p className="text-lg font-medium">Analytics Dashboard</p>
                     <p className="text-gray-500 text-center max-w-md mt-2">
-                      Track performance metrics for your media content and measure audience engagement.
+                      Track performance metrics for your media content and
+                      measure audience engagement.
                     </p>
                   </div>
                 </div>
@@ -188,7 +207,9 @@ export default function MediaPage() {
                     <h3 className="text-xl font-medium mb-2 group-hover:text-blue-600 transition-colors duration-300">
                       {category.title}
                     </h3>
-                    <p className="text-gray-600 text-sm">{category.description}</p>
+                    <p className="text-gray-600 text-sm">
+                      {category.description}
+                    </p>
                   </CardContent>
                 </Card>
               </Link>
@@ -197,7 +218,7 @@ export default function MediaPage() {
         </div>
       </div>
     </Layout>
-  )
+  );
 }
 
 // Component for metric cards
@@ -210,7 +231,10 @@ function MetricCard({ title, value, change, trend, icon }) {
             <p className="text-sm font-medium text-gray-500">{title}</p>
             <p className="text-3xl font-bold mt-2">{value}</p>
             <div className="flex items-center mt-1">
-              <Badge variant={trend === "up" ? "success" : "destructive"} className="mr-2">
+              <Badge
+                variant={trend === "up" ? "success" : "destructive"}
+                className="mr-2"
+              >
                 {change}
               </Badge>
               <span className="text-xs text-gray-500">vs last month</span>
@@ -220,7 +244,7 @@ function MetricCard({ title, value, change, trend, icon }) {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 // Component for content cards
@@ -228,9 +252,18 @@ function ContentCard({ content }) {
   return (
     <Card className="overflow-hidden">
       <div className="relative h-40">
-        <Image src={content.image || "/placeholder.svg"} alt={content.title} fill className="object-cover" />
+        <Image
+          src={content.image || "/placeholder.svg"}
+          alt={content.title}
+          fill
+          className="object-cover"
+        />
         <div className="absolute top-2 right-2">
-          <Badge variant={content.status === "Published" ? "success" : "secondary"}>{content.status}</Badge>
+          <Badge
+            variant={content.status === "Published" ? "success" : "secondary"}
+          >
+            {content.status}
+          </Badge>
         </div>
       </div>
       <CardContent className="p-4">
@@ -238,18 +271,25 @@ function ContentCard({ content }) {
         <p className="text-gray-500 text-sm mb-2">
           {content.type} • {content.date}
         </p>
-        <p className="text-sm text-gray-600 line-clamp-2">{content.description}</p>
+        <p className="text-sm text-gray-600 line-clamp-2">
+          {content.description}
+        </p>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 // Component for asset cards
-function AssetCard({ asset }) {
+function AssetCard({ asset }: { asset: any }) {
   return (
     <div className="relative group cursor-pointer rounded-lg overflow-hidden border border-gray-200">
       <div className="relative h-40 bg-gray-100">
-        <Image src={asset.thumbnail || "/placeholder.svg"} alt={asset.name} fill className="object-cover" />
+        <Image
+          src={asset.thumbnail || "/placeholder.svg"}
+          alt={asset.name}
+          fill
+          className="object-cover"
+        />
       </div>
       <div className="p-2">
         <p className="text-sm font-medium truncate">{asset.name}</p>
@@ -258,26 +298,28 @@ function AssetCard({ asset }) {
         </p>
       </div>
       <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-        <Button variant="secondary" size="sm" className="mr-2">
+        <Button size="sm" className="mr-2">
           View
         </Button>
         <Button size="sm">Use</Button>
       </div>
     </div>
-  )
+  );
 }
 
 // Sample data
 const mediaCategories = [
   {
     title: "News",
-    description: "Stay updated with the latest architectural trends and company announcements.",
+    description:
+      "Stay updated with the latest architectural trends and company announcements.",
     image: "/placeholder.svg?height=400&width=600&text=News",
     link: "/media/newsfeed",
   },
   {
     title: "Projects",
-    description: "Explore our portfolio of innovative and sustainable architectural projects.",
+    description:
+      "Explore our portfolio of innovative and sustainable architectural projects.",
     image: "/placeholder.svg?height=400&width=600&text=Projects",
     link: "/media/projects",
   },
@@ -289,11 +331,12 @@ const mediaCategories = [
   },
   {
     title: "Spotlight",
-    description: "Featured stories and in-depth looks at our most impactful work.",
+    description:
+      "Featured stories and in-depth looks at our most impactful work.",
     image: "/placeholder.svg?height=400&width=600&text=Spotlight",
     link: "/media/spotlight",
   },
-]
+];
 
 const recentContent = [
   {
@@ -326,7 +369,7 @@ const recentContent = [
     description:
       "A comprehensive guide to the latest sustainable building materials and their practical applications in modern architecture.",
   },
-]
+];
 
 const mediaAssets = [
   {
@@ -385,4 +428,4 @@ const mediaAssets = [
     format: "GLB",
     size: "18.9 MB",
   },
-]
+];

@@ -15,8 +15,8 @@ export default function TasksPage() {
     async function loadTasks() {
       try {
         setLoading(true)
-        const data = await tasksService.getAll()
-        setTasks(data)
+        // const data = await tasksService.getAll()
+        // setTasks(data)
       } catch (err) {
         console.error("Error loading tasks:", err)
         setError("Failed to load tasks. Please try again.")

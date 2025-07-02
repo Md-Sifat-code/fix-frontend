@@ -1,8 +1,8 @@
 // This is a mock function. In a real application, you would fetch this data from your backend.
-export async function getProjectById(id: string) {
+export async function getProjectById() {
   // Mock data
   return {
-    id,
+    id: 1,
     name: "Active Project 1",
     clientName: "Acme Corporation",
     projectType: "Commercial",
@@ -34,5 +34,5 @@ export async function getProjectById(id: string) {
       { id: "mem2", name: "Jane Smith" },
       { id: "mem3", name: "Bob Johnson" },
     ],
-  }
+  };
 }

@@ -1,61 +1,62 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import Layout from "@/components/Layout"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { useAuth } from "@/lib/auth"
-import { LoadingAnimation } from "@/components/LoadingAnimation"
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Layout from "@/components/Layout";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+// import { useAuth } from "@/lib/auth"
+import { LoadingAnimation } from "@/components/LoadingAnimation";
+import { useAuth } from "@/lib/auth";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [isLoggingIn, setIsLoggingIn] = useState(false)
-  const router = useRouter()
-  const { user, loading, login, tempLogin } = useAuth()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const router = useRouter();
+  const { user, loading, login, tempLogin } = useAuth();
 
   useEffect(() => {
     if (user && !loading) {
-      router.push("/dashboard")
+      router.push("/dashboard");
     }
-  }, [user, loading, router])
+  }, [user, loading, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoggingIn(true)
+    e.preventDefault();
+    setIsLoggingIn(true);
     try {
-      await login(email, password)
+      await login(email, password);
       // We'll let the useEffect handle the redirection
     } catch (error) {
-      console.error("Login failed:", error)
-      setIsLoggingIn(false)
+      console.error("Login failed:", error);
+      setIsLoggingIn(false);
       // Handle login error (e.g., show error message to user)
     }
-  }
+  };
 
   const handleTempLogin = async () => {
-    setIsLoggingIn(true)
+    setIsLoggingIn(true);
     try {
-      await tempLogin()
+      await tempLogin();
       // We'll let the useEffect handle the redirection
     } catch (error) {
-      console.error("Temporary login failed:", error)
-      setIsLoggingIn(false)
+      console.error("Temporary login failed:", error);
+      setIsLoggingIn(false);
       // Handle temp login error
     }
-  }
+  };
 
   if (loading || isLoggingIn) {
-    return <LoadingAnimation />
+    return <LoadingAnimation />;
   }
 
   if (user) {
-    return null // This will prevent a flash of the login page before redirecting
+    return null; // This will prevent a flash of the login page before redirecting
   }
 
   return (
@@ -63,7 +64,9 @@ export default function LoginPage() {
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <Card className="w-full max-w-md">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold text-center">Login</CardTitle>
+            <CardTitle className="text-2xl font-bold text-center">
+              Login
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -94,14 +97,23 @@ export default function LoginPage() {
               </Button>
             </form>
             <div className="mt-4">
-              <Button type="button" variant="secondary" className="w-full" onClick={handleTempLogin}>
+              <Button
+                type="button"
+                variant="secondary"
+                className="w-full"
+                onClick={handleTempLogin}
+              >
                 Quick Access (Temporary)
               </Button>
             </div>
             <div className="mt-4 text-center">
               <p className="text-sm text-gray-600">
                 Don't have an account?{" "}
-                <Button variant="link" className="p-0" onClick={() => console.log("Sign up clicked")}>
+                <Button
+                  variant="link"
+                  className="p-0"
+                  onClick={() => console.log("Sign up clicked")}
+                >
                   Sign up
                 </Button>
               </p>
@@ -110,5 +122,5 @@ export default function LoginPage() {
         </Card>
       </div>
     </Layout>
-  )
+  );
 }

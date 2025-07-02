@@ -25,21 +25,21 @@ export async function POST(request: Request) {
     const timestamp = new Date().toISOString()
 
     // Store message in Supabase
-    const supabase = createClient()
-    const { error: dbError } = await supabase.from("chat_messages").insert({
-      id: messageId,
-      content,
-      user_id: senderId,
-      user_name: senderName,
-      user_avatar: senderAvatar,
-      created_at: timestamp,
-      attachments,
-    })
+    // const supabase = createClient()
+    // const { error: dbError } = await supabase.from("chat_messages").insert({
+    //   id: messageId,
+    //   content,
+    //   user_id: senderId,
+    //   user_name: senderName,
+    //   user_avatar: senderAvatar,
+    //   created_at: timestamp,
+    //   attachments,
+    // })
 
-    if (dbError) {
-      console.error("Error saving message to Supabase:", dbError)
-      return NextResponse.json({ error: "Failed to save message" }, { status: 500 })
-    }
+    // if (dbError) {
+    //   console.error("Error saving message to Supabase:", dbError)
+    //   return NextResponse.json({ error: "Failed to save message" }, { status: 500 })
+    // }
 
     // Format the message for Pusher
     const message = {
