@@ -314,11 +314,7 @@ export default function MediaProjectsPage() {
         <div className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {sortedProjects.map((project) => (
-              <Card
-                key={project.id}
-                className="overflow-hidden cursor-pointer"
-                // onClick={() => setSelectedProject(project)}
-              >
+              <Card key={project.id} className="overflow-hidden cursor-pointer">
                 <img
                   src={"https://picsum.photos/1280/720"}
                   alt={project.name}
@@ -327,7 +323,12 @@ export default function MediaProjectsPage() {
                   className="w-full h-64 object-cover"
                 />
                 <CardContent className="p-6">
-                  <h2 className="text-xl font-semibold mb-2">{project.name}</h2>
+                  <h2
+                    onClick={() => setSelectedProject(project)}
+                    className="text-xl font-semibold mb-2 hover:underline hover:text-black/90"
+                  >
+                    {project.name}
+                  </h2>
                   <p className="text-gray-600 mb-4">{project.description}</p>
                   <div className="flex flex-wrap justify-between items-center text-sm text-gray-500 mb-4">
                     <span>{project.location}</span>
