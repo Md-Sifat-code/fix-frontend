@@ -559,7 +559,7 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
             {filteredProjects.map((project) => (
               <div key={project.id} className="border rounded-lg p-4 shadow hover:shadow-lg transition">
                 <img
-                  src={project.images[0]}
+                  src={"https://picsum.photos/1280/720"}
                   alt={project.name}
                   className="w-full h-40 object-cover rounded mb-3"
                 />

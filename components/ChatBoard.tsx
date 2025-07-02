@@ -397,7 +397,7 @@ export function ChatBoard() {
                   {message.image && (
                     <div className="mt-2">
                       <Image
-                        src={message.image || "/placeholder.svg"}
+                        src={"https://picsum.photos/1280/720"}
                         alt="Shared image"
                         width={300}
                         height={200}

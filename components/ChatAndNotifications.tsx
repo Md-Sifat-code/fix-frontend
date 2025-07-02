@@ -389,7 +389,7 @@ export function ChatAndNotifications() {
                       {message.image && (
                         <div className="mt-2">
                           <Image
-                            src={message.image || "/placeholder.svg"}
+                            src={"https://picsum.photos/1280/720"}
                             alt="Shared screenshot"
                             width={400}
                             height={300}

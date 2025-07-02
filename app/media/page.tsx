@@ -197,7 +197,7 @@ export default function MediaPage() {
                 <Card className="overflow-hidden h-full transition-shadow duration-300 group-hover:shadow-lg">
                   <div className="relative h-48">
                     <Image
-                      src={category.image || "/placeholder.svg"}
+                      src={"https://picsum.photos/1280/720"}
                       alt={category.title}
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -253,7 +253,7 @@ function ContentCard({ content }) {
     <Card className="overflow-hidden">
       <div className="relative h-40">
         <Image
-          src={content.image || "/placeholder.svg"}
+          src={"https://picsum.photos/1280/720"}
           alt={content.title}
           fill
           className="object-cover"
@@ -285,7 +285,7 @@ function AssetCard({ asset }: { asset: any }) {
     <div className="relative group cursor-pointer rounded-lg overflow-hidden border border-gray-200">
       <div className="relative h-40 bg-gray-100">
         <Image
-          src={asset.thumbnail || "/placeholder.svg"}
+          src={"https://picsum.photos/1280/720"}
           alt={asset.name}
           fill
           className="object-cover"
@@ -313,27 +313,27 @@ const mediaCategories = [
     title: "News",
     description:
       "Stay updated with the latest architectural trends and company announcements.",
-    image: "/placeholder.svg?height=400&width=600&text=News",
+    image: "https://picsum.photos/1280/720",
     link: "/media/newsfeed",
   },
   {
     title: "Projects",
     description:
       "Explore our portfolio of innovative and sustainable architectural projects.",
-    image: "/placeholder.svg?height=400&width=600&text=Projects",
+    image: "https://picsum.photos/1280/720",
     link: "/media/projects",
   },
   {
     title: "Publications",
     description: "Read our thought leadership articles and industry insights.",
-    image: "/placeholder.svg?height=400&width=600&text=Publications",
+    image: "https://picsum.photos/1280/720",
     link: "/media/publications",
   },
   {
     title: "Spotlight",
     description:
       "Featured stories and in-depth looks at our most impactful work.",
-    image: "/placeholder.svg?height=400&width=600&text=Spotlight",
+    image: "https://picsum.photos/1280/720",
     link: "/media/spotlight",
   },
 ];
@@ -345,7 +345,7 @@ const recentContent = [
     type: "News",
     status: "Published",
     date: "Mar 24, 2025",
-    image: "/placeholder.svg?height=300&width=600&text=Smith+Residence",
+    image: "https://picsum.photos/1280/720",
     description:
       "Our Smith Residence project has been recognized with a prestigious design award for innovative sustainable architecture.",
   },
@@ -355,7 +355,7 @@ const recentContent = [
     type: "Article",
     status: "Draft",
     date: "Mar 27, 2025",
-    image: "/placeholder.svg?height=300&width=600&text=Urban+Planning",
+    image: "https://picsum.photos/1280/720",
     description:
       "Exploring the future of urban development with our new initiative focused on community-centered planning approaches.",
   },
@@ -365,7 +365,7 @@ const recentContent = [
     type: "Publication",
     status: "Published",
     date: "Mar 20, 2025",
-    image: "/placeholder.svg?height=300&width=600&text=Green+Materials",
+    image: "https://picsum.photos/1280/720",
     description:
       "A comprehensive guide to the latest sustainable building materials and their practical applications in modern architecture.",
   },
@@ -375,56 +375,56 @@ const mediaAssets = [
   {
     id: 1,
     name: "Tokyo Office Exterior.jpg",
-    thumbnail: "/placeholder.svg?height=200&width=300&text=Image",
+    thumbnail: "https://picsum.photos/1280/720",
     format: "JPG",
     size: "2.4 MB",
   },
   {
     id: 2,
     name: "Smith Residence Blueprint.pdf",
-    thumbnail: "/placeholder.svg?height=200&width=300&text=PDF",
+    thumbnail: "https://picsum.photos/1280/720",
     format: "PDF",
     size: "4.8 MB",
   },
   {
     id: 3,
     name: "Green Building Presentation.pptx",
-    thumbnail: "/placeholder.svg?height=200&width=300&text=PPTX",
+    thumbnail: "https://picsum.photos/1280/720",
     format: "PPTX",
     size: "8.2 MB",
   },
   {
     id: 4,
     name: "Downtown Project Render.png",
-    thumbnail: "/placeholder.svg?height=200&width=300&text=Render",
+    thumbnail: "https://picsum.photos/1280/720",
     format: "PNG",
     size: "3.7 MB",
   },
   {
     id: 5,
     name: "Site Analysis Video.mp4",
-    thumbnail: "/placeholder.svg?height=200&width=300&text=Video",
+    thumbnail: "https://picsum.photos/1280/720",
     format: "MP4",
     size: "24.5 MB",
   },
   {
     id: 6,
     name: "Material Samples.jpg",
-    thumbnail: "/placeholder.svg?height=200&width=300&text=Samples",
+    thumbnail: "https://picsum.photos/1280/720",
     format: "JPG",
     size: "1.8 MB",
   },
   {
     id: 7,
     name: "Concept Sketches.ai",
-    thumbnail: "/placeholder.svg?height=200&width=300&text=Sketch",
+    thumbnail: "https://picsum.photos/1280/720",
     format: "AI",
     size: "12.3 MB",
   },
   {
     id: 8,
     name: "Model 3D.glb",
-    thumbnail: "/placeholder.svg?height=200&width=300&text=3D+Model",
+    thumbnail: "https://picsum.photos/1280/720",
     format: "GLB",
     size: "18.9 MB",
   },

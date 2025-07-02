@@ -126,7 +126,7 @@ export default function ClientInfoSection({
           {selectedCountryCode && (
             <div className="flex-shrink-0 w-8 h-6 overflow-hidden rounded shadow">
               <img
-                src={`https://flagcdn.com/w80/${selectedCountryCode.toLowerCase()}.png`}
+                src={"https://picsum.photos/1280/720"}
                 alt={`${selectedCountry} flag`}
                 className="w-full h-full object-cover"
                 loading="lazy"

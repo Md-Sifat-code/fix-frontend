@@ -121,7 +121,7 @@ export default function PortfolioPage() {
           {filteredAndSortedProjects.map((project) => (
             <Card key={project.id} className="overflow-hidden">
               <Image
-                src={project.image || "/placeholder.svg"}
+                src={"https://picsum.photos/1280/720"}
                 alt={project.title}
                 width={400}
                 height={300}

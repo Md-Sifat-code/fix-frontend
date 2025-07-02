@@ -419,7 +419,7 @@ function Dashboard() {
                 <div className="aspect-video bg-gray-100 flex items-center justify-center">
                   {mediaPreview ? (
                     <img
-                      src={mediaPreview || "/placeholder.svg"}
+                      src={"https://picsum.photos/1280/720"}
                       alt={mediaTitle || "Project Preview"}
                       className="w-full h-full object-cover"
                     />
@@ -476,7 +476,7 @@ function Dashboard() {
                   {mediaPreview ? (
                     <div className="relative w-full h-full">
                       <img
-                        src={mediaPreview || "/placeholder.svg"}
+                        src={"https://picsum.photos/1280/720"}
                         alt={mediaTitle || "Instagram Preview"}
                         className="w-full h-full object-cover"
                       />
@@ -1086,7 +1086,7 @@ function Dashboard() {
                           <video src={mediaPreview} className="w-full h-auto" controls />
                         ) : (
                           <img
-                            src={mediaPreview || "/placeholder.svg"}
+                            src={"https://picsum.photos/1280/720"}
                             alt="Preview"
                             className="w-full h-auto object-contain"
                           />
@@ -1495,7 +1495,7 @@ function Dashboard() {
                   >
                     <div className="aspect-video bg-gray-200 relative">
                       <img
-                        src={`/video_placeholder.png`}
+                        src={"https://picsum.photos/1280/720"}
                         alt={`Video ${video}`}
                         className="w-full h-full object-cover"
                       />

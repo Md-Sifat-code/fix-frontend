@@ -276,7 +276,7 @@ export default function MediaProjectsPage() {
                 onClick={() => setSelectedProject(project)}
               >
                 <img
-                  src={project.images[0] || "/placeholder.svg"}
+                  src={"https://picsum.photos/1280/720"}
                   alt={project.name}
                   width={600}
                   height={400}

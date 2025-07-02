@@ -1,13 +1,19 @@
-"use client"
+"use client";
 
-import React from "react"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
-import { ThumbprintButton } from "@/components/ThumbprintButton"
-import Image from "next/image"
+import React from "react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { ThumbprintButton } from "@/components/ThumbprintButton";
+import Image from "next/image";
 
 // Array of all U.S. states
 const usStates = [
@@ -61,7 +67,7 @@ const usStates = [
   "West Virginia",
   "Wisconsin",
   "Wyoming",
-]
+];
 
 // Array of all countries (this is a simplified list, you might want to use a more comprehensive one)
 const countries = [
@@ -261,34 +267,44 @@ const countries = [
   { name: "Yemen", code: "YE" },
   { name: "Zambia", code: "ZM" },
   { name: "Zimbabwe", code: "ZW" },
-]
+];
 
-export function ProjectDetailsSection({ formData, updateFormData, goToNextSection }) {
-  const [sameAsMailingAddress, setSameAsMailingAddress] = React.useState(false)
+export function ProjectDetailsSection({
+  formData,
+  updateFormData,
+  goToNextSection,
+}) {
+  const [sameAsMailingAddress, setSameAsMailingAddress] = React.useState(false);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     if (!sameAsMailingAddress || !name.startsWith("project")) {
-      updateFormData({ [name]: value })
+      updateFormData({ [name]: value });
     }
-  }
+  };
 
   const handleSelectChange = (name, value) => {
     if (name === "projectCountry") {
       if (value === "Select Country") {
-        updateFormData({ [name]: "", projectState: "" })
-      } else if (value !== "United States" && formData.projectState !== "Outside of U.S. Jurisdiction") {
-        updateFormData({ [name]: value, projectState: "Outside of U.S. Jurisdiction" })
+        updateFormData({ [name]: "", projectState: "" });
+      } else if (
+        value !== "United States" &&
+        formData.projectState !== "Outside of U.S. Jurisdiction"
+      ) {
+        updateFormData({
+          [name]: value,
+          projectState: "Outside of U.S. Jurisdiction",
+        });
       } else {
-        updateFormData({ [name]: value })
+        updateFormData({ [name]: value });
       }
     } else {
-      updateFormData({ [name]: value })
+      updateFormData({ [name]: value });
     }
-  }
+  };
 
   const handleSameAsMailingAddressChange = (checked: boolean) => {
-    setSameAsMailingAddress(checked)
+    setSameAsMailingAddress(checked);
     if (checked) {
       updateFormData({
         projectStreetAddress: formData.streetAddress,
@@ -296,9 +312,9 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
         projectState: formData.state,
         projectZipCode: formData.zipCode,
         projectCountry: formData.country,
-      })
+      });
     }
-  }
+  };
 
   return (
     <div className="space-y-6 pb-6">
@@ -326,7 +342,9 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
             <Checkbox
               id="sameAsMailingAddress"
               checked={sameAsMailingAddress}
-              onCheckedChange={(checked) => handleSameAsMailingAddressChange(checked as boolean)}
+              onCheckedChange={(checked) =>
+                handleSameAsMailingAddressChange(checked as boolean)
+              }
             />
             <Label htmlFor="sameAsMailingAddress" className="text-sm">
               Same as mailing address
@@ -335,7 +353,10 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
         </div>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="projectStreetAddress" className="text-xs font-normal">
+            <Label
+              htmlFor="projectStreetAddress"
+              className="text-xs font-normal"
+            >
               Street Address
             </Label>
             <Input
@@ -370,7 +391,9 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
               <Select
                 name="projectState"
                 value={formData.projectState}
-                onValueChange={(value) => handleSelectChange("projectState", value)}
+                onValueChange={(value) =>
+                  handleSelectChange("projectState", value)
+                }
                 disabled={sameAsMailingAddress}
               >
                 <SelectTrigger className="mt-1">
@@ -382,7 +405,9 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
                       {state}
                     </SelectItem>
                   ))}
-                  <SelectItem value="Outside of U.S. Jurisdiction">Outside of U.S. Jurisdiction</SelectItem>
+                  <SelectItem value="Outside of U.S. Jurisdiction">
+                    Outside of U.S. Jurisdiction
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -409,7 +434,9 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
               <Select
                 name="projectCountry"
                 value={formData.projectCountry}
-                onValueChange={(value) => handleSelectChange("projectCountry", value)}
+                onValueChange={(value) =>
+                  handleSelectChange("projectCountry", value)
+                }
                 disabled={sameAsMailingAddress}
               >
                 <SelectTrigger className="mt-1">
@@ -421,7 +448,7 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
                       <div className="flex items-center">
                         {country.code && (
                           <Image
-                            src={`https://flagcdn.com/w20/${country.code.toLowerCase()}.png`}
+                            src={"https://picsum.photos/1280/720"}
                             width={20}
                             height={15}
                             alt={`${country.name} flag`}
@@ -449,13 +476,17 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
             <Select
               name="serviceType"
               value={formData.serviceType || "new-construction"}
-              onValueChange={(value) => handleSelectChange("serviceType", value)}
+              onValueChange={(value) =>
+                handleSelectChange("serviceType", value)
+              }
             >
               <SelectTrigger id="serviceType" className="mt-1">
                 <SelectValue placeholder="Select service type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="new-construction">New Construction</SelectItem>
+                <SelectItem value="new-construction">
+                  New Construction
+                </SelectItem>
                 <SelectItem value="renovation">Renovation</SelectItem>
                 <SelectItem value="addition">Addition</SelectItem>
                 <SelectItem value="interior-design">Interior Design</SelectItem>
@@ -481,7 +512,9 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
       </div>
 
       <div>
-        <h2 className="text-base font-medium mb-4">Project Timeline and Budget</h2>
+        <h2 className="text-base font-medium mb-4">
+          Project Timeline and Budget
+        </h2>
         <div className="space-y-4">
           <div>
             <Label htmlFor="projectTimeline" className="text-xs font-normal">
@@ -490,7 +523,9 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
             <Select
               name="projectTimeline"
               value={formData.projectTimeline}
-              onValueChange={(value) => handleSelectChange("projectTimeline", value)}
+              onValueChange={(value) =>
+                handleSelectChange("projectTimeline", value)
+              }
             >
               <SelectTrigger id="projectTimeline" className="mt-1">
                 <SelectValue placeholder="Select expected timeline" />
@@ -510,7 +545,9 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
             <Select
               name="budgetRange"
               value={formData.budgetRange}
-              onValueChange={(value) => handleSelectChange("budgetRange", value)}
+              onValueChange={(value) =>
+                handleSelectChange("budgetRange", value)
+              }
             >
               <SelectTrigger id="budgetRange" className="mt-1">
                 <SelectValue placeholder="Select budget range" />
@@ -528,7 +565,9 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
       </div>
 
       <div>
-        <h2 className="text-base font-medium mb-4">Architectural Preferences</h2>
+        <h2 className="text-base font-medium mb-4">
+          Architectural Preferences
+        </h2>
         <div className="space-y-4">
           <div>
             <Label htmlFor="architecturalStyle" className="text-xs font-normal">
@@ -560,10 +599,15 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
       </div>
 
       <div>
-        <h2 className="text-base font-medium mb-4">Sustainability and Special Requirements</h2>
+        <h2 className="text-base font-medium mb-4">
+          Sustainability and Special Requirements
+        </h2>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="sustainabilityGoals" className="text-xs font-normal">
+            <Label
+              htmlFor="sustainabilityGoals"
+              className="text-xs font-normal"
+            >
               Sustainability Goals
             </Label>
             <Textarea
@@ -576,7 +620,10 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
             />
           </div>
           <div>
-            <Label htmlFor="specialRequirements" className="text-xs font-normal">
+            <Label
+              htmlFor="specialRequirements"
+              className="text-xs font-normal"
+            >
               Special Requirements or Accessibility Needs
             </Label>
             <Textarea
@@ -595,7 +642,10 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
         <h2 className="text-base font-medium mb-4">Required Documents</h2>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="propertyBoundarySurveyMap" className="text-xs font-normal">
+            <Label
+              htmlFor="propertyBoundarySurveyMap"
+              className="text-xs font-normal"
+            >
               Property Boundary/Survey Map
             </Label>
             <Input
@@ -604,7 +654,9 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
               type="file"
               onChange={(e) => {
                 if (e.target.files?.[0]) {
-                  updateFormData({ propertyBoundarySurveyMap: e.target.files[0] })
+                  updateFormData({
+                    propertyBoundarySurveyMap: e.target.files[0],
+                  });
                 }
               }}
               className="mt-1"
@@ -612,7 +664,10 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
             />
           </div>
           <div>
-            <Label htmlFor="additionalProjectPhotos" className="text-xs font-normal">
+            <Label
+              htmlFor="additionalProjectPhotos"
+              className="text-xs font-normal"
+            >
               Additional Project Photos (Optional)
             </Label>
             <Input
@@ -622,7 +677,9 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
               multiple
               onChange={(e) => {
                 if (e.target.files) {
-                  updateFormData({ additionalProjectPhotos: Array.from(e.target.files) })
+                  updateFormData({
+                    additionalProjectPhotos: Array.from(e.target.files),
+                  });
                 }
               }}
               className="mt-1"
@@ -635,5 +692,5 @@ export function ProjectDetailsSection({ formData, updateFormData, goToNextSectio
         <ThumbprintButton onClick={goToNextSection} text="Next Step" />
       </div>
     </div>
-  )
+  );
 }

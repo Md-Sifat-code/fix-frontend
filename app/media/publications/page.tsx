@@ -11,7 +11,7 @@ export default function PublicationsPage() {
           {[1, 2, 3, 4, 5, 6].map((publication) => (
             <Card key={publication} className="flex flex-col">
               <Image
-                src={`/placeholder.svg?height=200&width=300&text=Publication+${publication}`}
+                src={"https://picsum.photos/1280/720"}
                 alt={`Publication ${publication}`}
                 width={300}
                 height={200}

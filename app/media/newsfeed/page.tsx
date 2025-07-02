@@ -1,28 +1,34 @@
-"use client"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import Layout from "@/components/Layout"
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+"use client";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import Layout from "@/components/Layout";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface NewsItem {
-  id: number
-  title: string
-  date: string
-  summary: string
-  image: string
-  source: string
+  id: number;
+  title: string;
+  date: string;
+  summary: string;
+  image: string;
+  source: string;
 }
 
 interface FeaturedProject {
-  id: number
-  name: string
-  year: number
-  architect: string
-  photographer: string
-  location: string
-  summary: string
-  images: string[]
+  id: number;
+  name: string;
+  year: number;
+  architect: string;
+  photographer: string;
+  location: string;
+  summary: string;
+  images: string[];
 }
 
 const featuredProject: FeaturedProject = {
@@ -35,54 +41,59 @@ const featuredProject: FeaturedProject = {
   summary:
     "A stunning waterfront structure that seamlessly blends with its environment, showcasing innovative use of sustainable materials and cutting-edge design techniques. This project of the month exemplifies the future of adaptive architecture, responding to both environmental and social needs of urban spaces.",
   images: [
-    "/placeholder.svg?height=400&width=600&text=Floating+Pavilion+1",
-    "/placeholder.svg?height=400&width=600&text=Floating+Pavilion+2",
-    "/placeholder.svg?height=400&width=600&text=Floating+Pavilion+3",
+    "https://picsum.photos/1280/720",
+    "https://picsum.photos/1280/720",
+    "https://picsum.photos/1280/720",
   ],
-}
+};
 
 const newsItems: NewsItem[] = [
   {
     id: 1,
     title: "Architecture Simple Wins Design Award",
     date: "June 15, 2023",
-    summary: "Our eco-friendly office complex project receives recognition for innovative sustainable design.",
-    image: "/placeholder.svg?height=100&width=100&text=Award",
+    summary:
+      "Our eco-friendly office complex project receives recognition for innovative sustainable design.",
+    image: "https://picsum.photos/1280/720",
     source: "Architectural Digest",
   },
   {
     id: 2,
     title: "New Urban Planning Initiative Launched",
     date: "June 10, 2023",
-    summary: "We're partnering with the city to develop a new community-focused urban renewal project.",
-    image: "/placeholder.svg?height=100&width=100&text=Urban+Planning",
+    summary:
+      "We're partnering with the city to develop a new community-focused urban renewal project.",
+    image: "https://picsum.photos/1280/720",
     source: "CityLab",
   },
   {
     id: 3,
     title: "Spotlight on Our Latest Residential Project",
     date: "June 5, 2023",
-    summary: "Explore our modern approach to home design in our recently completed residential project.",
-    image: "/placeholder.svg?height=100&width=100&text=Residential",
+    summary:
+      "Explore our modern approach to home design in our recently completed residential project.",
+    image: "https://picsum.photos/1280/720",
     source: "Dwell Magazine",
   },
   {
     id: 4,
     title: "Architecture Simple Expands Team",
     date: "May 28, 2023",
-    summary: "We're excited to welcome new talent to our growing team of architects and designers.",
-    image: "/placeholder.svg?height=100&width=100&text=Team",
+    summary:
+      "We're excited to welcome new talent to our growing team of architects and designers.",
+    image: "https://picsum.photos/1280/720",
     source: "Architect Magazine",
   },
   {
     id: 5,
     title: "Upcoming Webinar: Future of Sustainable Architecture",
     date: "May 20, 2023",
-    summary: "Join us for an insightful discussion on the future trends in sustainable architectural design.",
-    image: "/placeholder.svg?height=100&width=100&text=Webinar",
+    summary:
+      "Join us for an insightful discussion on the future trends in sustainable architectural design.",
+    image: "https://picsum.photos/1280/720/1280/720",
     source: "ArchDaily",
   },
-]
+];
 
 export default function NewsfeedPage() {
   return (
@@ -98,7 +109,7 @@ export default function NewsfeedPage() {
                     {featuredProject.images.map((image, index) => (
                       <CarouselItem key={index}>
                         <Image
-                          src={image || "/placeholder.svg"}
+                          src={"https://picsum.photos/1280/720"}
                           alt={`${featuredProject.name} - Image ${index + 1}`}
                           width={400}
                           height={300}
@@ -112,7 +123,9 @@ export default function NewsfeedPage() {
                 </Carousel>
               </div>
               <div className="md:w-1/2">
-                <h3 className="text-xl font-semibold mb-2">{featuredProject.name}</h3>
+                <h3 className="text-xl font-semibold mb-2">
+                  {featuredProject.name}
+                </h3>
                 <div className="grid grid-cols-2 gap-2 text-sm text-gray-500 mb-4">
                   <span>Year: {featuredProject.year}</span>
                   <span>Architect: {featuredProject.architect}</span>
@@ -133,7 +146,7 @@ export default function NewsfeedPage() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
                   <Image
-                    src={news.image || "/placeholder.svg"}
+                    src={"https://picsum.photos/1280/720"}
                     alt={news.title}
                     width={100}
                     height={100}
@@ -147,7 +160,9 @@ export default function NewsfeedPage() {
                     <p className="text-gray-600 mb-4">{news.summary}</p>
                     <div className="flex justify-between items-center">
                       <Button variant="outline">Read Full Article</Button>
-                      <span className="text-sm text-gray-500">Source: {news.source}</span>
+                      <span className="text-sm text-gray-500">
+                        Source: {news.source}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -157,5 +172,5 @@ export default function NewsfeedPage() {
         </div>
       </div>
     </Layout>
-  )
+  );
 }

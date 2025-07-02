@@ -35,7 +35,7 @@ export default function ServicesPage() {
               <Card className="overflow-hidden transition-shadow duration-300 group-hover:shadow-lg h-full flex flex-col">
                 <div className="relative h-80">
                   <Image
-                    src={category.image || "/placeholder.svg"}
+                    src={"https://picsum.photos/1280/720"}
                     alt={category.title}
                     layout="fill"
                     objectFit="cover"

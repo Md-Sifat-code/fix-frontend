@@ -21,7 +21,7 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onClose
         </DialogHeader>
         <div className="my-4">
           <Image
-            src={project.images[0] || "/placeholder.svg"}
+            src={"https://picsum.photos/1280/720"}
             alt={project.name}
             width={800}
             height={500}

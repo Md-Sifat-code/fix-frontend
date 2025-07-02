@@ -37,7 +37,7 @@ export function DashboardHeader({ user, onSettingsClick, onThemeToggle, onBackCl
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-TxkXFdGIO4zSEa6yNCbzGZ3WICOLs2.png"
+              src="https://picsum.photos/1280/720"
               alt="Architecture Simple Logo"
               width={24}
               height={24}
