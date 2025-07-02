@@ -174,23 +174,29 @@ export default function MediaProjectsPage() {
     updatedComment: string
   ) => {
     const existing = comments[projectId] || [];
-    // If the index is invalid, do nothing
     if (index < 0 || index >= existing.length) return;
 
-    const updatedComments = [...existing];
-    updatedComments[index] = updatedComment;
+    // Copy the project’s comments
+    const newCommentsForProject = [...existing];
 
-    const newCommentsByProject = {
-      ...comments,
-      [projectId]: updatedComments,
-    };
+    if (updatedComment.trim().length === 0) {
+      // Empty string → remove the comment
+      newCommentsForProject.splice(index, 1);
+    } else {
+      // Otherwise update it
+      newCommentsForProject[index] = updatedComment;
+    }
 
-    setComments(newCommentsByProject);
+    // If no comments left for this project, drop the key entirely
+    const newComments =
+      newCommentsForProject.length === 0
+        ? Object.fromEntries(
+            Object.entries(comments).filter(([id]) => id !== projectId)
+          )
+        : { ...comments, [projectId]: newCommentsForProject };
 
-    localStorage.setItem(
-      "projectComments",
-      JSON.stringify(newCommentsByProject)
-    );
+    setComments(newComments);
+    localStorage.setItem("projectComments", JSON.stringify(newComments));
   };
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
