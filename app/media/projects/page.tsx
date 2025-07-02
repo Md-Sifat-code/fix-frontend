@@ -15,7 +15,7 @@ import Layout from "@/components/Layout";
 import { SidebarFilter } from "@/components/SidebarFilter";
 import { Badge } from "@/components/ui/badge";
 import { ProjectDetails } from "@/components/ProjectDetails";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Edit, Send } from "lucide-react";
 import dynamic from "next/dynamic";
 import { Project } from "@/types/Project";
 
@@ -36,13 +36,24 @@ export default function MediaProjectsPage() {
 
   const handleVote = (projectId: string) => {
     const key = `voted-${projectId}`;
-    if (localStorage.getItem(key)) return; // already voted
+    const hasVoted = localStorage.getItem(key);
 
-    const newVotes = { ...votes, [projectId]: (votes[projectId] || 0) + 1 };
-    setVotes(newVotes);
-    localStorage.setItem("projectVotes", JSON.stringify(newVotes));
-    localStorage.setItem(key, "true");
+    let updatedVotes = { ...votes };
+
+    if (hasVoted) {
+      // User already voted → subtract 1 vote
+      updatedVotes[projectId] = Math.max((votes[projectId] || 1) - 1, 0);
+      localStorage.removeItem(key); // Optional: allow re-vote
+    } else {
+      // First time voting → add 1 vote
+      updatedVotes[projectId] = (votes[projectId] || 0) + 1;
+      localStorage.setItem(key, "true");
+    }
+
+    setVotes(updatedVotes);
+    localStorage.setItem("projectVotes", JSON.stringify(updatedVotes));
   };
+
   const [comments, setComments] = useState<{ [key: string]: string[] }>({});
 
   const handleAddComment = (projectId: string, comment: string) => {
@@ -154,6 +165,33 @@ export default function MediaProjectsPage() {
     setSelectedYearRange(range);
   };
 
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [editingText, setEditingText] = useState<string>("");
+
+  const handleEditComment = (
+    projectId: string,
+    index: number,
+    updatedComment: string
+  ) => {
+    const existing = comments[projectId] || [];
+    // If the index is invalid, do nothing
+    if (index < 0 || index >= existing.length) return;
+
+    const updatedComments = [...existing];
+    updatedComments[index] = updatedComment;
+
+    const newCommentsByProject = {
+      ...comments,
+      [projectId]: updatedComments,
+    };
+
+    setComments(newCommentsByProject);
+
+    localStorage.setItem(
+      "projectComments",
+      JSON.stringify(newCommentsByProject)
+    );
+  };
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
       const climateMatch =
@@ -273,7 +311,7 @@ export default function MediaProjectsPage() {
               <Card
                 key={project.id}
                 className="overflow-hidden cursor-pointer"
-                onClick={() => setSelectedProject(project)}
+                // onClick={() => setSelectedProject(project)}
               >
                 <img
                   src={"https://picsum.photos/1280/720"}
@@ -320,8 +358,52 @@ export default function MediaProjectsPage() {
                     <h4 className="text-sm font-semibold">Comments</h4>
                     <ul className="space-y-1 text-xs">
                       {(comments[project.id] || []).map((cmt, idx) => (
-                        <li key={idx} className="bg-secondary p-2 rounded">
-                          {cmt}
+                        <li
+                          key={idx}
+                          className="bg-secondary p-2 rounded flex justify-between items-center"
+                        >
+                          {editingIndex === idx ? (
+                            <div className="flex items-center gap-2 w-full">
+                              <input
+                                value={editingText}
+                                onChange={(e) => setEditingText(e.target.value)}
+                                className="text-xs bg-white text-black rounded p-1 w-full"
+                              />
+                              <button
+                                onClick={() => {
+                                  handleEditComment(
+                                    project.id,
+                                    idx,
+                                    editingText
+                                  );
+                                  setEditingIndex(null);
+                                }}
+                                className="text-xs text-blue-500"
+                              >
+                                Save
+                              </button>
+                              <button
+                                onClick={() => setEditingIndex(null)}
+                                className="text-xs text-red-500"
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          ) : (
+                            <div className="relative w-full flex items-center">
+                              <span>{cmt}</span>
+
+                              <button
+                                onClick={() => {
+                                  setEditingIndex(idx);
+                                  setEditingText(cmt);
+                                }}
+                                className="absolute right-0"
+                              >
+                                <Edit className="size-4" />
+                              </button>
+                            </div>
+                          )}
                         </li>
                       ))}
                     </ul>
@@ -341,11 +423,19 @@ export default function MediaProjectsPage() {
                         }
                       }}
                     >
-                      <input
-                        name="comment"
-                        placeholder="Add a comment..."
-                        className="w-full px-2 py-1 text-sm border rounded"
-                      />
+                      <div className="relative pr-10 flex text-center">
+                        <input
+                          name="comment"
+                          placeholder="Add a comment..."
+                          className="w-full mr-4 px-2 py-1 text-sm border rounded"
+                        />
+                        <button
+                          type="submit"
+                          className="bg-primary text-white p-2 rounded-full flex text-center justify-center absolute top-0 right-0"
+                        >
+                          <Send className="size-6 " />
+                        </button>
+                      </div>
                     </form>
                   </div>
                 </CardContent>
