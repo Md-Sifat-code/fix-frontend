@@ -111,8 +111,8 @@ export default function NewProjectPage() {
         </div>
 
         {/* Content area with padding for fixed header */}
-        <div className="pt-[137px] pb-8">
-          <div className="max-w-7xl mx-auto px-4">
+        <div className="pt-[70px] pb-8 ">
+          <div className="max-w-7xl mx-auto px-4 ">
             {paymentSuccessful ? (
               <ConfirmationPage
                 appointmentDate={formData.appointmentDate}

@@ -37,19 +37,19 @@ export function ConfirmationPage({
           <div className="bg-gray-50 p-6 rounded-lg">
             <h3 className="font-semibold mb-4">Appointment Details:</h3>
             <p>
-              <strong>Client Name:</strong> {clientName}
+              <strong>Client Name:</strong> {(clientName?.trim() || 'Jon Doe')}
             </p>
             <p>
-              <strong>Client Email:</strong> {clientEmail}
+              <strong>Client Email:</strong> {clientEmail || 'jondoe@email.com'}
             </p>
             <p>
               <strong>Date:</strong> {new Date(appointmentDate).toLocaleDateString()}
             </p>
             <p>
-              <strong>Time:</strong> {appointmentTime}
+              <strong>Time:</strong> {appointmentTime || '10:00 AM'}
             </p>
             <p>
-              <strong>Type:</strong> {appointmentType}
+              <strong>Type:</strong> {appointmentType || 'Consultation'}
             </p>
           </div>
           <p className="text-sm text-gray-600">

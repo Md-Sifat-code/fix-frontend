@@ -1,46 +1,91 @@
-"use client"
+"use client";
 
-import React from "react"
-import { Calendar } from "@/components/ui/calendar"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { Input } from "@/components/ui/input"
-import { ThumbprintButton } from "@/components/ThumbprintButton"
+import React, { useState } from "react";
+import { Calendar } from "@/components/ui/calendar";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { ThumbprintButton } from "@/components/ThumbprintButton";
 
-export function ScheduleAppointmentSection({ formData, updateFormData, goToNextSection }) {
-  const [selectedDate, setSelectedDate] = React.useState<Date | undefined>(
-    formData.appointmentDate ? new Date(formData.appointmentDate) : undefined,
-  )
-  const [selectedTime, setSelectedTime] = React.useState<string | null>(formData.appointmentTime || null)
-  const [meetingLocation, setMeetingLocation] = React.useState(formData.meetingLocation || "")
+export function ScheduleAppointmentSection({
+  formData,
+  updateFormData,
+  goToNextSection,
+}) {
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
+    formData.appointmentDate ? new Date(formData.appointmentDate) : undefined
+  );
+  const [selectedTime, setSelectedTime] = useState<string | null>(
+    formData.appointmentTime || null
+  );
+  const [meetingLocation, setMeetingLocation] = useState(
+    formData.meetingLocation || ""
+  );
+
+  // 🆕 Owner unavailable dates (greyed out)
+  const [unavailableDates, setUnavailableDates] = useState<Date[]>(
+    formData.unavailableDates || []
+  );
 
   const handleDateSelect = (date: Date | undefined) => {
-    setSelectedDate(date)
-    setSelectedTime(null)
-    updateFormData({ appointmentDate: date ? date.toISOString() : null, appointmentTime: null })
-  }
+    if (!date) return;
+
+    // If date is unavailable (greyed out), block selection
+    const isUnavailable = unavailableDates.some(
+      (d) => d.toDateString() === date.toDateString()
+    );
+    if (isUnavailable) return;
+
+    setSelectedDate(date);
+    setSelectedTime(null);
+    updateFormData({
+      appointmentDate: date.toISOString(),
+      appointmentTime: null,
+    });
+  };
 
   const handleTimeSelect = (time: string) => {
-    setSelectedTime(time)
-    updateFormData({ appointmentTime: time })
-  }
+    setSelectedTime(time);
+    updateFormData({ appointmentTime: time });
+  };
 
   const getAvailableTimes = (date: Date | undefined) => {
-    // This is a placeholder. In a real application, you'd fetch available times from your backend.
-    return ["9:00 AM", "10:00 AM", "11:00 AM", "2:00 PM", "3:00 PM", "4:00 PM"]
-  }
+    return ["9:00 AM", "10:00 AM", "11:00 AM", "2:00 PM", "3:00 PM", "4:00 PM"];
+  };
 
   const handleInputChange = (e) => {
-    updateFormData({ [e.target.name]: e.target.value })
-  }
+    updateFormData({ [e.target.name]: e.target.value });
+  };
 
   const handleMeetingLocationChange = (e) => {
-    setMeetingLocation(e.target.value)
-    updateFormData({ meetingLocation: e.target.value })
-  }
+    setMeetingLocation(e.target.value);
+    updateFormData({ meetingLocation: e.target.value });
+  };
 
+  // 🆕 Toggle date as unavailable
+  const toggleUnavailableDate = (date: Date) => {
+    const exists = unavailableDates.find(
+      (d) => d.toDateString() === date.toDateString()
+    );
+    let updatedDates;
+    if (exists) {
+      updatedDates = unavailableDates.filter(
+        (d) => d.toDateString() !== date.toDateString()
+      );
+    } else {
+      updatedDates = [...unavailableDates, date];
+    }
+    setUnavailableDates(updatedDates);
+    updateFormData({ unavailableDates: updatedDates });
+  };
   return (
     <div className="space-y-6">
       <div className="space-y-6">
@@ -52,9 +97,33 @@ export function ScheduleAppointmentSection({ formData, updateFormData, goToNextS
             mode="single"
             selected={selectedDate}
             onSelect={handleDateSelect}
+            disabled={unavailableDates}
             className="mt-2 border-0 rounded-none"
+            modifiers={{ unavailable: unavailableDates }}
+            modifiersClassNames={{
+              unavailable: "border border-red-500 text-gray-400 opacity-50",
+            }}
           />
+          <div className="text-xs text-gray-500 mt-2">
+            Greyed out dates indicate unavailability.
+          </div>
+
+          {/* 🆕 Button to mark selected date unavailable */}
+          {selectedDate && (
+            <Button
+              variant="outline"
+              className="mt-3 text-xs"
+              onClick={() => toggleUnavailableDate(selectedDate)}
+            >
+              {unavailableDates.some(
+                (d) => d.toDateString() === selectedDate.toDateString()
+              )
+                ? "Mark as Available"
+                : "Mark as Unavailable"}
+            </Button>
+          )}
         </div>
+
         <div>
           <Label htmlFor="appointmentTime" className="text-xs">
             Select Time
@@ -79,6 +148,7 @@ export function ScheduleAppointmentSection({ formData, updateFormData, goToNextS
           )}
         </div>
       </div>
+
       {selectedDate && selectedTime && (
         <div>
           <h2 className="text-base font-medium mb-6">Selected Appointment</h2>
@@ -96,7 +166,9 @@ export function ScheduleAppointmentSection({ formData, updateFormData, goToNextS
           <Select
             name="appointmentType"
             value={formData.appointmentType}
-            onValueChange={(value) => updateFormData({ appointmentType: value })}
+            onValueChange={(value) =>
+              updateFormData({ appointmentType: value })
+            }
           >
             <SelectTrigger id="appointmentType" className="mt-1">
               <SelectValue placeholder="Select appointment type" />
@@ -126,7 +198,8 @@ export function ScheduleAppointmentSection({ formData, updateFormData, goToNextS
               />
             </div>
             <p className="text-xs text-muted-foreground">
-              Note: Client will be responsible for representative's travel expenses to meeting location.
+              Note: Client will be responsible for representative's travel
+              expenses to meeting location.
             </p>
           </div>
         )}
@@ -147,8 +220,8 @@ export function ScheduleAppointmentSection({ formData, updateFormData, goToNextS
         </div>
       </div>
       <div className="flex justify-center mt-8">
-        <ThumbprintButton onClick={goToNextSection} text="Next Step" />
+        <ThumbprintButton onClick={goToNextSection} text="Review & Confirm" />
       </div>
     </div>
-  )
+  );
 }
