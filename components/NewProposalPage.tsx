@@ -524,7 +524,7 @@ export default function NewProposalPage({ projectData, onProposalCreated }: NewP
                 onClick={() => setActiveStep("client")}
               >
                 <FileText className="h-4 w-4 mr-2" />
-                Proposal Details
+                Proposal Details hhhhhhhhhhhh
               </Button>
               <Button
                 variant={activeStep === "services" ? "default" : "outline"}

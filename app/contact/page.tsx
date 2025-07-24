@@ -87,10 +87,10 @@ export default function ContactPage() {
                 </div>
               </CardContent>
             </Card>
-            <div className="h-64 bg-gray-200 rounded-lg overflow-hidden">
-              {/* Replace this div with an actual map component or embed */}
+            {/* <div className="h-64 bg-gray-200 rounded-lg overflow-hidden">
+              
               <div className="w-full h-full flex items-center justify-center text-gray-500">Map placeholder</div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
