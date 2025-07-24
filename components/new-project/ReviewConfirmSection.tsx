@@ -137,20 +137,20 @@ export function ReviewConfirmSection({ formData, updateFormData, onPaymentSucces
         <h2 className="text-base font-medium mb-6">Client Information</h2>
         <div className="space-y-4">
           <p className="text-sm">
-            <span className="font-medium">Name:</span> {formData.firstName} {formData.middleInitial} {formData.lastName}
+            <span className="font-medium">Name:</span> {formData.firstName || 'Client name'} {formData.middleInitial } {formData.lastName}
           </p>
           <p className="text-sm">
-            <span className="font-medium">Email:</span> {formData.email}
+            <span className="font-medium">Email:</span> {formData.email || 'Client@email.com'}
           </p>
           <p className="text-sm">
-            <span className="font-medium">Phone:</span> {formData.phone}
+            <span className="font-medium">Phone:</span> {formData.phone || '(555) 123-4567'}
           </p>
           <p className="text-sm">
             <span className="font-medium">Alternate Phone:</span> {formData.alternatePhone || "N/A"}
           </p>
           <p className="text-sm">
-            <span className="font-medium">Address:</span> {formData.streetAddress}, {formData.city}, {formData.state}{" "}
-            {formData.zipCode}, {formData.country}
+            <span className="font-medium">Address:</span> {formData.streetAddress || 'Client address'}, {formData.city || 'Client city'}, {formData.state || 'Client state'}{" "}
+            {formData.zipCode || 'Client zip code'}, {formData.country || 'Client country'}
           </p>
           <p className="text-sm">
             <span className="font-medium">Occupation:</span> {formData.occupation || "N/A"}
@@ -175,23 +175,22 @@ export function ReviewConfirmSection({ formData, updateFormData, onPaymentSucces
         <h2 className="text-base font-medium mb-6">Project Details</h2>
         <div className="space-y-4">
           <p className="text-sm">
-            <span className="font-medium">Project Name:</span> {formData.projectName}
+            <span className="font-medium">Project Name:</span> {formData.projectName || 'Project name'}
           </p>
           <p className="text-sm">
-            <span className="font-medium">Service Type:</span> {formData.serviceType}
+            <span className="font-medium">Service Type:</span> {formData.serviceType || 'Service type'}
           </p>
           <p className="text-sm">
-            <span className="font-medium">Square Footage:</span> {formData.squareFootage} sq ft
+            <span className="font-medium">Square Footage:</span> {formData.squareFootage || 'Square footage'} sq ft
           </p>
           <p className="text-sm">
-            <span className="font-medium">Project Address:</span> {formData.projectStreetAddress},{" "}
-            {formData.projectCity}, {formData.projectState} {formData.projectZipCode}, {formData.projectCountry}
+            <span className="font-medium">Project Address:</span> {formData.projectStreetAddress || 'Project street address'}, {formData.projectCity || 'Project city'}, {formData.projectState || 'Project state'} {formData.projectZipCode || 'Project zip code'}, {formData.projectCountry || 'Project country'}
           </p>
           <p className="text-sm">
-            <span className="font-medium">Project Timeline:</span> {formData.projectTimeline}
+            <span className="font-medium">Project Timeline:</span> {formData.projectTimeline || 'Project timeline'}
           </p>
           <p className="text-sm">
-            <span className="font-medium">Budget Range:</span> {formData.budgetRange}
+            <span className="font-medium">Budget Range:</span> {formData.budgetRange || 'Budget range'}
           </p>
           <p className="text-sm">
             <span className="font-medium">Architectural Style:</span> {formData.architecturalStyle || "N/A"}

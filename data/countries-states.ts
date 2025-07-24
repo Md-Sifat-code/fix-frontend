@@ -256,4 +256,5 @@ export const usStates = [
   { name: "Puerto Rico", code: "PR" },
   { name: "United States Minor Outlying Islands", code: "UM" },
   { name: "U.S. Virgin Islands", code: "VI" },
+  { name: "Not within United States", code: "NWUS" },
 ]

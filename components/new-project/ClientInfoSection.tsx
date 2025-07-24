@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { countries, usStates } from "@/data/countries-states"
+import { ThumbprintButton } from "../ThumbprintButton"
 
 interface ClientInfoSectionProps {
   clientData: any
@@ -24,6 +25,7 @@ interface ClientInfoSectionProps {
   onPrevious: () => void
   setClientData: (data: any) => void
   onSave?: () => void
+  goToNextSection: () => void
 }
 
 export default function ClientInfoSection({
@@ -32,9 +34,11 @@ export default function ClientInfoSection({
   onPrevious,
   setClientData,
   onSave,
+ goToNextSection
 }: ClientInfoSectionProps) {
   const [formData, setFormData] = useState({
     firstName: clientData?.firstName || "",
+    middleName: clientData?.middleName || "",
     lastName: clientData?.lastName || "",
     companyName: clientData?.companyName || "",
     email: clientData?.email || "",
@@ -96,18 +100,23 @@ export default function ClientInfoSection({
           <Label htmlFor="firstName">First Name</Label>
           <Input id="firstName" name="firstName" value={formData.firstName} onChange={handleInputChange} required />
         </div>
+        <div className="space-y-2">
+          <Label htmlFor="middleName">Middle Name</Label>
+          <Input id="middleName" name="middleName" value={formData.middleName} onChange={handleInputChange} />
+        </div>
 
         <div className="space-y-2">
           <Label htmlFor="lastName">Last Name</Label>
           <Input id="lastName" name="lastName" value={formData.lastName} onChange={handleInputChange} required />
         </div>
-      </div>
-
-      <div className="space-y-2">
+        <div className="space-y-2">
         <Label htmlFor="companyName">Company Name (optional)</Label>
         <Input id="companyName" name="companyName" value={formData.companyName} onChange={handleInputChange} />
       </div>
 
+      </div>
+
+      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
@@ -121,7 +130,7 @@ export default function ClientInfoSection({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="country">Country of residence</Label>
+        <Label htmlFor="country">Client Contact Address</Label>
         <div className="flex items-center gap-2">
           {selectedCountryCode && (
             <div className="flex-shrink-0 w-8 h-6 overflow-hidden rounded shadow">
@@ -162,7 +171,7 @@ export default function ClientInfoSection({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="address">Address</Label>
+        <Label htmlFor="address">Street Address</Label>
         <Input id="address" name="address" value={formData.address} onChange={handleInputChange} required />
       </div>
 
@@ -205,7 +214,7 @@ export default function ClientInfoSection({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="projectDescription">Project Description (optional)</Label>
+        <Label htmlFor="projectDescription">Additional Information (Optional)</Label>
         <Textarea
           id="projectDescription"
           name="projectDescription"
@@ -226,9 +235,14 @@ export default function ClientInfoSection({
               Save
             </Button>
           )}
-          <Button type="submit">Continue</Button>
+          {/* <Button type="submit">Continue</Button> */}
         </div>
       </div>
+     <div className="w-full mt-10 flex justify-center items-center ">
+         <div className="flex justify-center mt-8">
+                 <ThumbprintButton onClick={goToNextSection} text="Next Step" />
+               </div>
+     </div>
     </form>
   )
 }
