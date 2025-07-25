@@ -11,64 +11,75 @@ export default function AboutPage() {
           <div className="space-y-6">
             <div className="space-y-6 text-gray-600">
               <p>
-                Welcome to Architecture Simple! Established in 2023, we are a premier architectural firm based in
-                Oakland, CA. With a passion for innovative design and a commitment to excellence, we strive to create
-                spaces that inspire and transform. Our team of talented architects brings a wealth of experience and
-                expertise to every project, ensuring exceptional results that exceed expectations.
+                Welcome to Architecture Simple. Established in 2023, we are
+a premier architectural services and media-based company
+committed to design excellence and innovative practice. Our
+team offers extensive experience in both the residential and
+commercial sectors, delivering results that embody our
+guiding philosophy.
+
               </p>
               <p>
-                At Architecture Simple, we believe that architecture has the power to shape the world around us. Our
-                mission is to design spaces that not only meet the functional needs of our clients but also reflect
-                their unique vision and personality. Whether it's residential, commercial, or public projects, we
-                approach each one with meticulous attention to detail and a focus on creating harmonious, sustainable
-                environments.
+               At Architecture Simple, we believe architecture is not simply
+the act of building but the art of shaping the identity of cities,
+towns, and villages. Every structure is an expression of its
+climate, culture, and community and our mission is to create
+spaces that fulfill our clients’ functional needs while honoring
+the distinctive character of the land they occupy. We approach
+each commission with meticulous care and a deep respect for
+context, history, and sustainability.
               </p>
               <p>
-                With a portfolio that spans a wide range of architectural styles and scales, we have the versatility to
-                tackle any design challenge. From contemporary urban dwellings to timeless historic renovations, our
-                projects showcase our ability to blend creativity, functionality, and aesthetics seamlessly. We are
-                dedicated to delivering exceptional architectural solutions that stand the test of time and leave a
-                lasting impact on the communities we serve.
+               We are dedicated to producing architectural solutions of
+enduring quality; works that transcend fleeting trends and
+provide lasting value to the communities they serve. From
+revitalizing historic districts to designing contemporary urban
+environments or intimate residences, we aim to harmonize
+creativity, practicality, and beauty.
               </p>
               <p>
-                Experience the difference of working with Architecture Simple. Let us bring your architectural dreams to
-                life with our expertise, passion, and commitment to excellence. Contact us today to discuss your project
-                and embark on a journey of architectural transformation together.
+                Discover the difference of working with Architecture Simple.
+Let us help realize your architectural vision with our expertise,
+passion, and unwavering commitment to quality. Contact us
+today to embark on a journey of thoughtful design and
+meaningful transformation.
+
               </p>
-              <p className="italic">- CEO Eric Rivera</p>
+              <p className="italic">-CEO Eric Rivera
+</p>
             </div>
           </div>
 
           {/* Right Column */}
           <div className="space-y-12 flex flex-col justify-between">
             <div>
-              <h2 className="text-xl font-light mb-8">OFFICE LOCATION</h2>
+              <h2 className="text-xl font-light mb-8">LICENSED TO PRACTICE IN THE FOLLOWING STATES</h2>
               <div className="space-y-12">
                 <div>
-                  <h3 className="font-medium mb-2">Miami, FL</h3>
-                  <p className="text-gray-600">5 NW St. Suite 400,</p>
-                  <p className="text-gray-600">Miami, Florida 35521, US</p>
+                  <h3 className="font-medium mb-2">CALIFORNIA</h3>
+                  <p className="text-gray-600">#12938444</p>
+                  {/* <p className="text-gray-600">Miami, Florida 35521, US</p>
                   <Link href="tel:(925) 822-4374" className="text-blue-600 hover:text-blue-800">
                     (925) 822-4374
-                  </Link>
+                  </Link> */}
                 </div>
 
                 <div>
-                  <h3 className="font-medium mb-2">San Francisco, CA</h3>
-                  <p className="text-gray-600">5 NW St. Suite 400,</p>
-                  <p className="text-gray-600">Miami, Florida 35521, US</p>
+                  <h3 className="font-medium mb-2">FLORIDA</h3>
+                  <p className="text-gray-600">#12938444</p>
+                  {/* <p className="text-gray-600">Miami, Florida 35521, US</p>
                   <Link href="tel:(925) 822-4374" className="text-blue-600 hover:text-blue-800">
                     (925) 822-4374
-                  </Link>
+                  </Link> */}
                 </div>
 
                 <div>
-                  <h3 className="font-medium mb-2">Austin, TX</h3>
-                  <p className="text-gray-600">5 NW St. Suite 400,</p>
-                  <p className="text-gray-600">Miami, Florida 35521, US</p>
+                  <h3 className="font-medium mb-2">TEXAS</h3>
+                  <p className="text-gray-600">#12938444</p>
+                  {/* <p className="text-gray-600">Miami, Florida 35521, US</p>
                   <Link href="tel:(925) 822-4374" className="text-blue-600 hover:text-blue-800">
                     (925) 822-4374
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>

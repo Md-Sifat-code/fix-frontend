@@ -91,30 +91,12 @@ export default function PortfolioPage() {
   return (
     <Layout>
       <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* <h1 className="text-3xl font-light mb-6">Our Portfolio</h1> */}
+        <h1 className="text-3xl font-light mb-6">Our Portfolio</h1>
 
+          {/* search filter, sort option  */}
         <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
-          <div className="flex flex-wrap gap-4">
-            {categories.map((category) => (
-              <div key={category} className="flex items-center space-x-2">
-                <Checkbox
-                  id={category}
-                  checked={selectedCategories.includes(category)}
-                  onCheckedChange={() => handleCategoryChange(category)}
-                />
-                <Label htmlFor={category}>{category}</Label>
-              </div>
-            ))}
-          </div>
-          <Select value={sortBy} onValueChange={(value: "title" | "year") => setSortBy(value)}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="title">Sort by Title</SelectItem>
-              <SelectItem value="year">Sort by Year</SelectItem>
-            </SelectContent>
-          </Select>
+         
+          
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

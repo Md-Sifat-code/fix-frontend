@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout"
+import Layout from "@/components/Layout";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -6,110 +6,192 @@ export default function PrivacyPolicyPage() {
       <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
 
+        {/* 1. Introduction */}
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">1. Introduction</h2>
           <p className="mb-4">
-            At Architecture Simple, we respect your privacy and are committed to protecting your personal data. This
-            privacy policy will inform you about how we look after your personal data when you visit our website and
-            tell you about your privacy rights and how the law protects you.
+            At Architecture Simple, we respect your privacy and are committed to
+            protecting your personal data. This privacy policy explains how we
+            collect, use, store, and protect your data when you use our website,
+            project management dashboard, media platform, and related services.
           </p>
         </section>
 
+        {/* 2. The Data We Collect */}
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">2. The Data We Collect About You</h2>
+          <h2 className="text-2xl font-semibold mb-4">
+            2. The Data We Collect About You
+          </h2>
           <p className="mb-4">
-            Personal data, or personal information, means any information about an individual from which that person can
-            be identified. We may collect, use, store and transfer different kinds of personal data about you which we
-            have grouped together as follows:
+            “Personal data” means any information that can identify an
+            individual. We may collect, use, store, and transfer different kinds
+            of personal data about you, including:
           </p>
-          <ul className="list-disc pl-6 mb-4">
-            <li>Identity Data: includes first name, last name, username or similar identifier.</li>
-            <li>Contact Data: includes email address and telephone numbers.</li>
+          <ul className="list-disc pl-6 mb-4 space-y-2">
             <li>
-              Technical Data: includes internet protocol (IP) address, your login data, browser type and version, time
-              zone setting and location, browser plug-in types and versions, operating system and platform, and other
-              technology on the devices you use to access this website.
+              <strong>Identity Data:</strong> first name, middle name, last
+              name, username or similar identifier.
             </li>
-            <li>Usage Data: includes information about how you use our website, products and services.</li>
+            <li>
+              <strong>Contact Data:</strong> email address, telephone numbers,
+              mailing address.
+            </li>
+            <li>
+              <strong>Project Data:</strong> project name, site address, design
+              preferences, budget information, uploaded documents (e.g., survey
+              maps, photos), and any other details you share via our inquiry
+              forms or dashboard.
+            </li>
+            <li>
+              <strong>Appointment Data:</strong> consultation dates, times,
+              appointment types, and any notes you provide.
+            </li>
+            <li>
+              <strong>User-Generated Content:</strong> comments, votes, ratings,
+              and media you post on our platform.
+            </li>
+            <li>
+              <strong>Technical Data:</strong> IP address, browser type and
+              version, time zone, device info, OS, and technologies used to
+              access our website.
+            </li>
+            <li>
+              <strong>Usage Data:</strong> how you interact with our website,
+              services, and media features.
+            </li>
           </ul>
         </section>
 
+        {/* 3. How We Use Your Personal Data */}
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">3. How We Use Your Personal Data</h2>
+          <h2 className="text-2xl font-semibold mb-4">
+            3. How We Use Your Personal Data
+          </h2>
           <p className="mb-4">
-            We will only use your personal data when the law allows us to. Most commonly, we will use your personal data
-            in the following circumstances:
+            We will only use your personal data when the law allows us to. Most
+            commonly, we will use your data to:
           </p>
-          <ul className="list-disc pl-6 mb-4">
-            <li>Where we need to perform the contract we are about to enter into or have entered into with you.</li>
+          <ul className="list-disc pl-6 mb-4 space-y-2">
             <li>
-              Where it is necessary for our legitimate interests (or those of a third party) and your interests and
-              fundamental rights do not override those interests.
+              Provide, manage, and improve our architectural services and online
+              dashboard.
             </li>
-            <li>Where we need to comply with a legal obligation.</li>
+            <li>Deliver design proposals and related services.</li>
+            <li>
+              Facilitate appointment scheduling and communication with you.
+            </li>
+            <li>Enable comments, voting, and media uploads on our platform.</li>
+            <li>Respond to inquiries and offer customer support.</li>
+            <li>Comply with legal and regulatory obligations.</li>
+            <li>Ensure the security and integrity of our services.</li>
           </ul>
         </section>
 
+        {/* 4. Data Security */}
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">4. Data Security</h2>
           <p className="mb-4">
-            We have put in place appropriate security measures to prevent your personal data from being accidentally
-            lost, used or accessed in an unauthorized way, altered or disclosed. In addition, we limit access to your
-            personal data to those employees, agents, contractors and other third parties who have a business need to
-            know.
+            We implement appropriate technical and organizational security
+            measures to protect your data from unauthorized access, loss, or
+            misuse. This includes:
           </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">5. Data Retention</h2>
-          <p className="mb-4">
-            We will only retain your personal data for as long as reasonably necessary to fulfil the purposes we
-            collected it for, including for the purposes of satisfying any legal, regulatory, tax, accounting or
-            reporting requirements.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">6. Your Legal Rights</h2>
-          <p className="mb-4">
-            Under certain circumstances, you have rights under data protection laws in relation to your personal data,
-            including the right to:
-          </p>
-          <ul className="list-disc pl-6 mb-4">
-            <li>Request access to your personal data.</li>
-            <li>Request correction of your personal data.</li>
-            <li>Request erasure of your personal data.</li>
-            <li>Object to processing of your personal data.</li>
-            <li>Request restriction of processing your personal data.</li>
-            <li>Request transfer of your personal data.</li>
-            <li>Right to withdraw consent.</li>
+          <ul className="list-disc pl-6 mb-4 space-y-2">
+            <li>Secure storage of project documentation.</li>
+            <li>Encrypted communications where appropriate.</li>
+            <li>Access limited to those with a business need to know.</li>
           </ul>
         </section>
 
+        {/* 5. Data Retention */}
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">7. Changes to the Privacy Policy</h2>
+          <h2 className="text-2xl font-semibold mb-4">5. Data Retention</h2>
           <p className="mb-4">
-            We may update our privacy policy from time to time. We will notify you of any changes by posting the new
-            privacy policy on this page and updating the "Last updated" date at the top of this privacy policy.
+            We will retain your personal data only for as long as necessary to
+            fulfill the purposes for which we collected it, including:
+          </p>
+          <ul className="list-disc pl-6 mb-4 space-y-2">
+            <li>Managing active projects and client relationships.</li>
+            <li>Complying with legal, tax, and reporting obligations.</li>
+            <li>
+              Maintaining historical project records in accordance with
+              professional standards.
+            </li>
+          </ul>
+        </section>
+
+        {/* 6. Your Legal Rights */}
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">6. Your Legal Rights</h2>
+          <p className="mb-4">
+            Under certain data protection laws, you may have rights in relation
+            to your personal data, including:
+          </p>
+          <ul className="list-disc pl-6 mb-4 space-y-2">
+            <li>Access your personal data.</li>
+            <li>Correct your personal data.</li>
+            <li>
+              Erase your data (subject to legal or contractual retention).
+            </li>
+            <li>Object to processing of your data.</li>
+            <li>Restrict processing of your data.</li>
+            <li>Request data portability.</li>
+            <li>Withdraw consent where applicable.</li>
+            <li>
+              Request removal of user-generated content from our public
+              platform.
+            </li>
+          </ul>
+        </section>
+
+        {/* 7. User-Generated Content */}
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">
+            7. User-Generated Content
+          </h2>
+          <p className="mb-4">
+            Our platform includes features like comments, voting, and media
+            uploads. By submitting content, you agree to:
+          </p>
+          <ul className="list-disc pl-6 mb-4 space-y-2">
+            <li>Ensure your content is lawful, respectful, and accurate.</li>
+            <li>Allow us to moderate, remove, or edit content as needed.</li>
+            <li>
+              Grant Architecture Simple a non-exclusive, worldwide, royalty-free
+              license to use and display your content on our platform.
+            </li>
+          </ul>
+        </section>
+
+        {/* 8. Changes to Policy */}
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">
+            8. Changes to the Privacy Policy
+          </h2>
+          <p className="mb-4">
+            We may update this policy from time to time. Updates will be posted
+            on this page with a revised effective date. You are encouraged to
+            review this policy periodically.
           </p>
         </section>
 
+        {/* 9. Contact Us */}
         <section>
-          <h2 className="text-2xl font-semibold mb-4">8. Contact Us</h2>
+          <h2 className="text-2xl font-semibold mb-4">9. Contact Us</h2>
           <p className="mb-4">
-            If you have any questions about this privacy policy or our privacy practices, please contact us at:
+            If you have questions about this policy or how we handle your data,
+            contact us at:
           </p>
           <p className="mb-2">Email: privacy@architecturesimple.com</p>
           <p className="mb-2">Phone: (925) 922-4374</p>
-          <p>
+          {/* <p>
             Architecture Simple LLC
             <br />
             1222 Market St. Suite 400
             <br />
             Oakland, CA 92101
-          </p>
+          </p> */}
         </section>
       </div>
     </Layout>
-  )
+  );
 }
