@@ -15,9 +15,11 @@ import Layout from "@/components/Layout";
 import { SidebarFilter } from "@/components/SidebarFilter";
 import { Badge } from "@/components/ui/badge";
 import { ProjectDetails } from "@/components/ProjectDetails";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import dynamic from "next/dynamic";
 import { Project } from "@/types/Project";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Image from "next/image";
 
 const MapFilter = dynamic(() => import("@/components/MapFilter"), {
   ssr: false,
@@ -69,7 +71,8 @@ export default function MediaProjectsPage() {
       {
         id: "1",
         name: "Tropical Villa",
-        description: "A beautiful villa designed for tropical climate.",
+        description:
+          "A beautiful villa designed for tropical climate. ",
         images: ["https://via.placeholder.com/600x400"],
         location: "Phuket",
         continent: "Asia",
@@ -85,11 +88,13 @@ export default function MediaProjectsPage() {
         stage: "completed",
         lat: 7.8804,
         lng: 98.3923,
+        Photographer: "jonas tom",
       },
       {
         id: "2",
         name: "Desert House",
-        description: "An innovative design for desert climate.",
+        description:
+          "An innovative design for desert climate. ",
         images: ["https://via.placeholder.com/600x400"],
         location: "Phoenix",
         continent: "North America",
@@ -105,6 +110,7 @@ export default function MediaProjectsPage() {
         stage: "completed",
         lat: 33.4484,
         lng: -112.074,
+        Photographer: "cupper tom",
       },
       // Add more projects here...
     ];
@@ -113,6 +119,8 @@ export default function MediaProjectsPage() {
 
   const [sortBy, setSortBy] = useState<"name" | "year" | "continent">("name");
   const [selectedClimate, setSelectedClimate] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState(false);
+
   const [selectedStyles, setSelectedStyles] = useState<string[]>([]);
   const [selectedBuildingTypes, setSelectedBuildingTypes] = useState<string[]>(
     []
@@ -204,14 +212,43 @@ export default function MediaProjectsPage() {
   return (
     <Layout>
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-light mb-6">Featured Projects</h1>
+       <div className="flex  flex-coll flex-row justify-between mb-4 ">
+         <h1 className="text-3xl font-light ">Featured Projects</h1>
+          <div className="flex px-4 py-3 rounded-md border-2 border-[#CC3F3A] overflow-hidden w-1/3">
+            <Search className="text-[#CC3F3A] mr-3 rotate-90" size={16} />
+            <input
+              type="email"
+              placeholder="Search media..."
+              className="w-full outline-none bg-transparent text-[#CC3F3A] placeholder-[#CC3F3A] text-lg"
+            />
+          </div>
+       </div>
 
         {/* 🌍 Interactive Map Filter */}
         <MapFilter projects={filteredProjects} />
 
         {/* Sidebar Filters and Sorting */}
-        <div className="mb-8 flex justify-between items-center">
-          <SidebarFilter
+        <div className="mb-8  flex justify-end items-start gap-4  ">
+        
+
+        <div className="mb-4">
+            <Select
+            value={sortBy}
+            onValueChange={(value: "name" | "year" | "continent") =>
+              setSortBy(value)
+            }
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="name">Sort by Name</SelectItem>
+              <SelectItem value="year">Sort by Year</SelectItem>
+              <SelectItem value="continent">Sort by Continent</SelectItem>
+            </SelectContent>
+          </Select>
+        <div className=" mt-4 flex justify-end">
+              <SidebarFilter
             climates={climates}
             selectedClimate={selectedClimate}
             handleClimateChange={handleClimateChange}
@@ -231,26 +268,13 @@ export default function MediaProjectsPage() {
             handleYearRangeChange={handleYearRangeChange}
             projects={projects}
           />
-
-          <Select
-            value={sortBy}
-            onValueChange={(value: "name" | "year" | "continent") =>
-              setSortBy(value)
-            }
-          >
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="name">Sort by Name</SelectItem>
-              <SelectItem value="year">Sort by Year</SelectItem>
-              <SelectItem value="continent">Sort by Continent</SelectItem>
-            </SelectContent>
-          </Select>
         </div>
-        <h2 className="text-xl font-bold mb-4">
+        </div>
+    
+        </div>
+        {/* <h2 className="text-xl font-bold mb-4">
           🏆 Top 10 Projects of {new Date().getFullYear()}
-        </h2>
+        </h2> */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           {topProjects.map((project) => (
             <div key={project.id} className="border rounded p-4">
@@ -261,7 +285,10 @@ export default function MediaProjectsPage() {
             </div>
           ))}
         </div>
-
+          <div className="mb-6 ">
+            <button className="px-6 py-3  bg-white border-2 mr-4 text-black text-xl font-bold border-black hover:bg-black hover:text-white rounded-lg">Top 10</button>
+            <button className="px-6 py-3  bg-white border-2 text-black text-xl font-bold border-black hover:bg-black hover:text-white rounded-lg">All Projects</button>
+             </div>
         {/* Project Grid */}
         <p className="text-sm text-gray-500 mb-4">
           Showing {sortedProjects.length} of {filteredProjects.length} projects
@@ -275,23 +302,60 @@ export default function MediaProjectsPage() {
                 className="overflow-hidden cursor-pointer"
                 onClick={() => setSelectedProject(project)}
               >
-                <img
+                {/* <img
                   src={project.images[0] || "/placeholder.svg"}
                   alt={project.name}
                   width={600}
                   height={400}
                   className="w-full h-64 object-cover"
-                />
+                /> */}
+                 <div className="md:w-1/2">
+                <Carousel className="mb-4">
+                  <CarouselContent>
+                    {project.images.map((image, index) => (
+                      <CarouselItem key={index}>
+                        <Image
+                          src={image || "/placeholder.svg"}
+                          alt={`image`}
+                          width={400}
+                          height={300}
+                          className="w-full rounded-lg object-cover"
+                        />
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent >
+                  <CarouselPrevious  className="absolute left-4 top-40 -translate-y-1/2 z-10" />
+                  <CarouselNext  className="absolute -right-72 top-40 -translate-y-1/2 z-10" />
+                </Carousel>
+              </div>
                 <CardContent className="p-6">
-                  <h2 className="text-xl font-semibold mb-2">{project.name}</h2>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap justify-between items-center text-sm text-gray-500 mb-4">
-                    <span>{project.location}</span>
-                    <span>{project.continent}</span>
-                    <span>{project.year}</span>
-                    <span>{project.climate}</span>
-                    <span>{project.style}</span>
-                    <span>{project.buildingType}</span>
+                  <h2 className="text-xl font-semibold mb-2">
+                    {project.name} kk
+                  </h2>
+                  <p
+                    className={`text-gray-600 mb-1 ${
+                      expanded ? "" : "truncate"
+                    }`}
+                  >
+                    <strong>Architect:</strong> {project.description} <span>   <button
+                    onClick={() => setExpanded(!expanded)}
+                    className="text-blue-500 text-sm mb-2 hover:underline"
+                  >
+                    {expanded ? "Read less" : "Read more"}
+                  </button></span>
+                  </p>
+
+               
+                  <div className=" text-sm text-gray-500 mb-4">
+                    <h2>Photographer :{project.Photographer}</h2>
+                    <div>
+                      {/* <h2>{project.location}</h2>
+                    <h2>{project.continent}</h2>
+                    <h2>{project.year}</h2>
+                    <h2>{project.climate}</h2>
+                    <h2>{project.style}</h2>
+                    <h2>{project.buildingType}</h2> */}
+                    </div>
                   </div>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map((tag) => (
@@ -299,10 +363,24 @@ export default function MediaProjectsPage() {
                         {tag}
                       </Badge>
                     ))}
+                    <button className="px-6 bg-[#E6E8EB] rounded-full text-semibold">
+                      See All Tags
+                    </button>
                   </div>
 
                   {/* ✅ Voting */}
-                  <div className="flex items-center justify-between mt-2">
+                  <div className="  mt-2">
+                    <Button
+                      variant="outline"
+                      className="mr-4"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleVote(project.id);
+                      }}
+                    >
+                      👍 Vote ({votes[project.id] || 0})
+                    </Button>
                     <Button
                       variant="outline"
                       size="sm"
@@ -311,7 +389,7 @@ export default function MediaProjectsPage() {
                         handleVote(project.id);
                       }}
                     >
-                      👍 Vote ({votes[project.id] || 0})
+                      👍 View Comments ({votes[project.id] || 0})
                     </Button>
                   </div>
 

@@ -17,4 +17,5 @@ export interface Project {
   stage: "inquiry" | "bidding" | "active" | "completed"
   lat: number
   lng: number
+  Photographer: string
 }

@@ -89,19 +89,20 @@ export default function LoginPage() {
                   required
                 />
               </div>
+              <p className="cursor-pointer">Forgat password</p>
               <Button type="submit" className="w-full">
                 Login
               </Button>
             </form>
             <div className="mt-4">
-              <Button type="button" variant="secondary" className="w-full" onClick={handleTempLogin}>
+              <Button type="button" variant="outline" className="w-full border-none" onClick={handleTempLogin}>
                 Quick Access (Temporary)
               </Button>
             </div>
             <div className="mt-4 text-center">
-              <p className="text-sm text-gray-600">
-                Don't have an account?{" "}
-                <Button variant="link" className="p-0" onClick={() => console.log("Sign up clicked")}>
+              <p className="text-lg text-gray-600">
+                new client?{" "}
+                <Button variant="outline"  className="p-0 border-none" onClick={() => console.log("Sign up clicked")}>
                   Sign up
                 </Button>
               </p>
