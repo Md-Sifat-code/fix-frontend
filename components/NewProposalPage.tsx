@@ -649,7 +649,7 @@ export default function NewProposalPage({ projectData, onProposalCreated }: NewP
             </div>
 
             <div className="mb-6">
-              <Label htmlFor="address">Address</Label>
+              <Label htmlFor="address">State Address</Label>
               <Input
                 id="address"
                 value={clientInfo.address}

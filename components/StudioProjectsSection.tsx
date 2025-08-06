@@ -445,7 +445,7 @@ function ProjectsTable({
         <TableHeader>
           <TableRow>
             <TableHead>Project</TableHead>
-            <TableHead>Client</TableHead>
+            <TableHead>Client </TableHead>
             <TableHead>Project Manager</TableHead>
             <TableHead>Stage</TableHead>
             <TableHead>Phase</TableHead>

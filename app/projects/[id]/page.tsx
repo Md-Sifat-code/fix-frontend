@@ -224,7 +224,7 @@ export default function ProjectDetailsPage() {
           <h2 className="text-xl font-semibold text-red-600 mb-2">Error</h2>
           <p className="text-gray-600 mb-4">{error}</p>
           <Button onClick={() => router.push("/dashboard")} variant="outline" className="mr-2">
-            Go to Dashboard
+            Go to Dashboard 
           </Button>
           <Button onClick={() => window.location.reload()}>Try Again</Button>
         </div>
@@ -253,7 +253,7 @@ export default function ProjectDetailsPage() {
             <h2 className="text-xl font-semibold text-amber-600 mb-2">Project Not Found</h2>
             <p className="text-gray-600 mb-4">We couldn't find the project you're looking for.</p>
             <Button onClick={() => router.push("/dashboard")} variant="outline">
-              Go to Dashboard
+              Go to Dashboard 
             </Button>
           </div>
         </div>

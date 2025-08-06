@@ -1507,7 +1507,7 @@ export const NewProposalDialog: React.FC<NewProposalDialogProps> = ({ open, onOp
               <Button variant="ghost" size="icon" className="rounded-full" onClick={() => onOpenChange(false)}>
                 <ArrowLeft className="h-4 w-4" />
               </Button>
-              <h2 className="text-lg font-semibold">New Proposal</h2>
+              <h2 className="text-lg font-semibold">New Proposal </h2>
             </div>
           </div>
 

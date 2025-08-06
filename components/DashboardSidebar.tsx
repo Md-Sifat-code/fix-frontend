@@ -12,9 +12,9 @@ interface DashboardSidebarProps {
 
 export function DashboardSidebar({ activeTab, setActiveTab, unreadMessages }: DashboardSidebarProps) {
   return (
-    <header className="fixed top-0 left-0 right-0 z-10 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm py-4">
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <nav className="flex space-x-8">
+    <header className="fixed top-0 left-0 right-0  z-10 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm py-4">
+      <div className="px-2 md:px-20 flex justify-between items-center ">
+        <nav className="flex space-x-8 ">
           <Button
             variant="link"
             className={cn(

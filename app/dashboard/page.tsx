@@ -4,7 +4,7 @@ import { ProjectProvider } from "@/contexts/ProjectContext"
 export default function DashboardPage() {
   return (
     <ProjectProvider>
-      <Dashboard />
+    <Dashboard />
     </ProjectProvider>
   )
 }

@@ -90,6 +90,7 @@ export default function NewProjectPage() {
         {/* Fixed header section */}
         <div className="fixed top-[73px] left-0 right-0 bg-background z-20 border-b">
           <div className="max-w-7xl mx-auto px-4">
+            
             <div className="overflow-x-auto">
               <div className="flex space-x-2 md:space-x-4 py-4">
                 {sections.map((section, index) => (
