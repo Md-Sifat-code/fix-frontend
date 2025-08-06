@@ -80,7 +80,7 @@ export function InquiryStage({ project, onProjectUpdate, usedFallback = false }:
           <h1 className="text-3xl font-bold">{project.name}</h1>
           <div className="flex items-center mt-2 space-x-2">
             <Badge variant="outline" className="text-blue-600 bg-blue-50 hover:bg-blue-100">
-              Inquiry Stage
+              Inquiry Stage hhhj
             </Badge>
             {isConsultationCompleted ? (
               <Badge variant="outline" className="text-green-600 bg-green-50 hover:bg-green-100">
@@ -95,10 +95,11 @@ export function InquiryStage({ project, onProjectUpdate, usedFallback = false }:
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
+          <button className="px-6 py-1.5 bg-red-800 text-white rounded-md">Delete Inquiry</button>
           {!isConsultationCompleted ? (
             <Button onClick={handleMarkConsultationComplete} className="bg-green-600 hover:bg-green-700 text-white">
               <CheckCircle className="mr-2 h-4 w-4" />
-              Mark Consultation Complete
+              Mark Consultation Complete 
             </Button>
           ) : (
             <Button onClick={handleCreateProposal} className="bg-blue-600 hover:bg-blue-700 text-white">
@@ -179,6 +180,10 @@ export function InquiryStage({ project, onProjectUpdate, usedFallback = false }:
                 <Phone className="h-4 w-4 text-gray-400 mr-2" />
                 <span className="text-gray-700">{project.contact_phone}</span>
               </div>
+              <div className="flex items-center">
+                {/* <Phone className="h-4 w-4 text-gray-400 mr-2" /> */}
+                <span className="text-gray-700">State: {project.location}</span>
+              </div>
             </CardContent>
           </Card>
 
@@ -201,8 +206,11 @@ export function InquiryStage({ project, onProjectUpdate, usedFallback = false }:
                     ? new Date(project.consultation_date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
                     : "Not scheduled"}
                 </span>
+                
               </div>
-
+                    <div>
+                      <h2>appointment type: Null</h2>
+                    </div>
               <div className="mt-2">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-medium text-gray-700">Consultation Status</span>

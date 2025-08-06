@@ -1583,7 +1583,7 @@ export function DashboardOverview({
           <div className="bg-gray-50 rounded-lg p-0.5 mb-0.5">
             <div className="flex items-center">
               <Briefcase className="h-2 w-2 text-amber-600 mr-0.5" />
-              <h3 className="text-[11px] font-medium text-gray-700">Project Inventory</h3>
+              <h3 className="text-[11px] font-medium text-gray-700">Total projects for the firm </h3>
             </div>
             <div className="grid grid-cols-5 gap-0.5 mt-0.5">
               <div className="flex flex-col items-center">
@@ -1591,20 +1591,23 @@ export function DashboardOverview({
                 <div className="text-[11px] text-gray-500">Total</div>
               </div>
               <div className="flex flex-col items-center">
-                <div className="text-xs font-bold text-green-600">{projectStats.activeProjects}</div>
-                <div className="text-[11px] text-gray-500">Active</div>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="text-xs font-bold text-purple-600">{projectStats.completedProjects}</div>
-                <div className="text-[11px] text-gray-500">Done</div>
+                  <div className="text-xs font-bold text-sky-600">{projectStats.inquiryProjects}</div>
+                <div className="text-[11px] text-gray-500">Inq</div>
+                
               </div>
               <div className="flex flex-col items-center">
                 <div className="text-xs font-bold text-amber-600">{projectStats.biddingProjects}</div>
                 <div className="text-[11px] text-gray-500">Bid</div>
               </div>
               <div className="flex flex-col items-center">
-                <div className="text-xs font-bold text-sky-600">{projectStats.inquiryProjects}</div>
-                <div className="text-[11px] text-gray-500">Inq</div>
+                
+                {/* -col-lg-1 */}
+                <div className="text-xs font-bold text-green-600">{projectStats.activeProjects}</div>
+                <div className="text-[11px] text-gray-500">Active</div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="text-xs font-bold text-purple-600">{projectStats.completedProjects}</div>
+                <div className="text-[11px] text-gray-500">Done</div>
               </div>
             </div>
           </div>
@@ -1698,7 +1701,7 @@ export function DashboardOverview({
                   <span className="font-medium text-blue-600">80%</span>
                 </div>
                 <Progress
-                  value={80}
+                  value={50}
                   className="h-1 bg-green-100"
                   indicatorClassName="bg-gradient-to-r from-emerald-400 to-teal-500"
                 />
