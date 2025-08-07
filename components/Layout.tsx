@@ -259,6 +259,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </p>
               </div>
               <div className="text-center mt-4 space-x-4">
+                
+                <div className="block md:hidden">
+                  <Link
+                  href="/"
+                  className="text-sm text-gray-500 hover:text-gray-700"
+                >
+                  Mobile
+                </Link>
+                <Link
+                  href="/"
+                  className="text-sm ml-2 text-gray-500 hover:text-gray-700"
+                >
+                  Desktop
+                </Link>
+                </div>
                 <Link
                   href="/terms"
                   className="text-sm text-gray-500 hover:text-gray-700"
@@ -269,7 +284,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   href="/privacy"
                   className="text-sm text-gray-500 hover:text-gray-700"
                 >
-                  Privacy Policy
+                  Privacy Policy 
                 </Link>
               </div>
             </div>
