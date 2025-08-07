@@ -176,15 +176,15 @@ export function FinancialChart({ data }: FinancialChartProps) {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
         <div className="bg-blue-50 p-3 rounded-md border border-blue-100">
           <p className="text-sm text-blue-700 font-medium">Avg. Monthly Revenue</p>
-          <p className="text-xl font-bold">${(totalRevenue[totalRevenue.length - 1] / 12).toLocaleString()}</p>
+          <p className="text-xl font-bold">${(totalRevenue[totalRevenue.length - 1] / 12).toLocaleString()}  <span className="text-xs font-normal">Total revenue/ 12</span></p>
         </div>
         <div className="bg-red-50 p-3 rounded-md border border-red-100">
           <p className="text-sm text-red-700 font-medium">Avg. Monthly Cost</p>
-          <p className="text-xl font-bold">${(totalCost[totalCost.length - 1] / 12).toLocaleString()}</p>
+          <p className="text-xl font-bold">${(totalCost[totalCost.length - 1] / 12).toLocaleString()} <span className="text-xs font-normal">Total Overhead + Labor / 12</span></p>
         </div>
         <div className="bg-green-50 p-3 rounded-md border border-green-100">
           <p className="text-sm text-green-700 font-medium">Avg. Monthly Profit</p>
-          <p className="text-xl font-bold">${(profit[profit.length - 1] / 12).toLocaleString()}</p>
+          <p className="text-xl font-bold">${(profit[profit.length - 1] / 12).toLocaleString()} <span className="text-xs font-normal">Total Profit / 12</span></p>
         </div>
         <div className="bg-orange-50 p-3 rounded-md border border-orange-100">
           <p className="text-sm text-orange-700 font-medium">Avg. Utilization</p>
