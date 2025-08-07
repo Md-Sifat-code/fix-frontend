@@ -1539,70 +1539,8 @@ export function FinancialsPage() {
                   </CardContent>
                 </Card>
 
-                <Card className="col-span-1 md:col-span-3">
-                  <CardHeader>
-                    <CardTitle>Top Performing Projects</CardTitle>
-                    <CardDescription>By profit margin</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {[
-                        {
-                          name: "City Center Tower",
-                          client: "Metropolis Development",
-                          margin: 32,
-                          revenue: 450000,
-                        },
-                        {
-                          name: "Riverside Residences",
-                          client: "Waterfront Properties",
-                          margin: 28,
-                          revenue: 380000,
-                        },
-                        {
-                          name: "Tech Campus Expansion",
-                          client: "InnoTech Inc.",
-                          margin: 25,
-                          revenue: 520000,
-                        },
-                        {
-                          name: "Harborview Hotel",
-                          client: "Coastal Resorts",
-                          margin: 23,
-                          revenue: 290000,
-                        },
-                        {
-                          name: "Downtown Revitalization",
-                          client: "City of Oakridge",
-                          margin: 21,
-                          revenue: 410000,
-                        },
-                      ].map((project, i) => (
-                        <div key={i} className="flex items-center space-x-4">
-                          <div className="bg-primary/10 text-primary rounded-full w-8 h-8 flex items-center justify-center font-medium">
-                            {i + 1}
-                          </div>
-                          <div className="flex-1 space-y-1">
-                            <p className="text-sm font-medium leading-none">
-                              {project.name} 
-                            </p>
-                            <p className="text-xs text-muted-foreground">
-                              {project.client}
-                            </p>
-                          </div>
-                          <div className="text-right">
-                            <div className="text-sm font-medium">
-                              {project.margin}% margin
-                            </div>
-                            <div className="text-xs text-muted-foreground">
-                              ${project.revenue.toLocaleString()} revenue 
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+
+              
               </div>
             </>
           )}
@@ -1988,7 +1926,7 @@ export function FinancialsPage() {
 
                 {/* Search Projects Section */}
                 <div className="pt-4 border-t mt-6">
-                  <h3 className="text-lg font-medium mb-4">Search Projects</h3>
+                  <h3 className="text-lg font-medium mb-4">Search Projects t</h3>
                   <div className="flex w-full items-center space-x-2">
                     <div className="relative flex-1">
                       <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -2090,6 +2028,8 @@ export function FinancialsPage() {
                     </div>
                   )}
                 </div>
+
+             
               </div>
             </CardContent>
           </Card>
@@ -2117,6 +2057,72 @@ export function FinancialsPage() {
               dashboard to view detailed financial information.
             </p>
           )}
+          <div>
+            <Card className="col-span-1 md:col-span-3">
+                  <CardHeader>
+                    <CardTitle>Top Performing Projects</CardTitle>
+                    <CardDescription>By profit margin</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {[
+                        {
+                          name: "City Center Tower",
+                          client: "Metropolis Development",
+                          margin: 32,
+                          revenue: 450000,
+                        },
+                        {
+                          name: "Riverside Residences",
+                          client: "Waterfront Properties",
+                          margin: 28,
+                          revenue: 380000,
+                        },
+                        {
+                          name: "Tech Campus Expansion",
+                          client: "InnoTech Inc.",
+                          margin: 25,
+                          revenue: 520000,
+                        },
+                        {
+                          name: "Harborview Hotel",
+                          client: "Coastal Resorts",
+                          margin: 23,
+                          revenue: 290000,
+                        },
+                        {
+                          name: "Downtown Revitalization",
+                          client: "City of Oakridge",
+                          margin: 21,
+                          revenue: 410000,
+                        },
+                      ].map((project, i) => (
+                        <div key={i} className="flex items-center space-x-4">
+                          <div className="bg-primary/10 text-primary rounded-full w-8 h-8 flex items-center justify-center font-medium">
+                            {i + 1}
+                          </div>
+                          <div className="flex-1 space-y-1">
+                            <p className="text-sm font-medium leading-none">
+                              {project.name} 
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              {project.client}
+                            </p>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-sm font-medium">
+                              {project.margin}% margin
+                            </div>
+                            <div className="text-xs text-muted-foreground">
+                              ${project.revenue.toLocaleString()} revenue 
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+          </div>
         </TabsContent>
 
         <TabsContent value="payroll" className="space-y-3">
@@ -3224,7 +3230,9 @@ export function FinancialsPage() {
                               missedPeriod.payDate
                             ).toLocaleDateString()}
                           </div>
-                          <div className="text-muted-foreground">Status:</div>
+                          <div className="text-muted-foreground">
+                              <h2>Status:</h2>
+                          </div>
                           <div className="text-red-600">
                             {missedPeriod.daysOverdue} days overdue
                           </div>
