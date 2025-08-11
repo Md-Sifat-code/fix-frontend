@@ -231,10 +231,10 @@ export function ProfileSettings() {
         {/* Main content */}
         <div className="col-span-12 md:col-span-8 lg:col-span-9">
           <Tabs defaultValue="profile">
-            <TabsList className="grid w-full grid-cols-3 md:grid-cols-4">
+            <TabsList className="grid w-full grid-cols-3 md:grid-cols-4 bg-white dark:bg-black">
               <TabsTrigger value="profile">
                 <User className="h-4 w-4 mr-2" />
-                Profile
+                Profile 
               </TabsTrigger>
               <TabsTrigger value="security">
                 <Shield className="h-4 w-4 mr-2" />

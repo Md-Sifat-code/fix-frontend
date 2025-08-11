@@ -42,7 +42,7 @@ export default function ProfileList() {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold">Profiles</h2>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 bg-white dark:bg-black">
         {profiles.map((profile) => (
           <Card key={profile.id}>
             <CardHeader className="flex flex-row items-center gap-4 pb-2">

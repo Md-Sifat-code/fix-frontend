@@ -33,7 +33,7 @@ export function DashboardHeader({ user, onSettingsClick, onThemeToggle, onBackCl
 
   return (
     <header className="bg-background border-b border-border sticky top-0 z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-32">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <Image
@@ -44,7 +44,7 @@ export function DashboardHeader({ user, onSettingsClick, onThemeToggle, onBackCl
               className="object-contain"
             />
             <span className="text-lg sm:text-xl font-extralight tracking-wide pt-0.5 ml-2">
-              Architecture Simple<span className="text-yellow-400">.</span>
+              Architecture  Simple<span className="text-yellow-400">.</span>
             </span>
           </div>
           <div className="flex items-center space-x-4">
