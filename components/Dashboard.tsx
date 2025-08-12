@@ -311,10 +311,10 @@ const allProjects = [
 
 function Dashboard() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const tab = searchParams.get("tab");
+  // const searchParams = useSearchParams();
+  // const tab = searchParams.get("tab");
   const { user, loading, logout, updateProfilePhoto } = useAuth();
-  const [activeTab, setActiveTab] = useState(tab || "studio");
+  const [activeTab, setActiveTab] = useState( "studio");
   const [searchTerm, setSearchTerm] = useState("");
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [showProposalDialog, setShowProposalDialog] = useState(false);

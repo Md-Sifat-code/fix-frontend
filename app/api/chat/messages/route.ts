@@ -3,7 +3,10 @@ import { createClient } from "@/lib/supabase-client"
 
 export async function GET() {
   try {
-    const supabase = createClient()
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+
+ const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
     // Get messages from Supabase
     const { data, error } = await supabase

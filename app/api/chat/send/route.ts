@@ -25,7 +25,10 @@ export async function POST(request: Request) {
     const timestamp = new Date().toISOString()
 
     // Store message in Supabase
-    const supabase = createClient()
+   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+   
+   const supabase = createClient(supabaseUrl, supabaseKey)
     const { error: dbError } = await supabase.from("chat_messages").insert({
       id: messageId,
       content,

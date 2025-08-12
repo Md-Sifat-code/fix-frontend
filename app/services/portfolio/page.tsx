@@ -5,6 +5,7 @@ import Layout from "@/components/Layout";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import img from "@/components/assets/img.avif";
 import {
   Select,
   SelectContent,
@@ -27,7 +28,7 @@ interface Project {
   id: number;
   title: string;
   category: string;
-  image: string;
+  image: string[];
   year: number;
   description?: string;
 }
@@ -38,7 +39,10 @@ const projects: Project[] = [
     title: "Modern Residence",
     category: "Residential",
     description: "Historic Building ",
-    image: "/placeholder.svg?height=300&width=400&text=Modern+Residence",
+    image: [
+      "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+      "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+    ],
     year: 2023,
   },
   {
@@ -46,7 +50,10 @@ const projects: Project[] = [
     title: "City Center Plaza",
     description: "Historic Building Renovation",
     category: "Urban Planning",
-    image: "/placeholder.svg?height=300&width=400&text=City+Center+Plaza",
+    image: [
+      "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+      "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+    ],
     year: 2022,
   },
   {
@@ -54,7 +61,10 @@ const projects: Project[] = [
     title: "Eco-Friendly Office Complex",
     description: "Historic Building Renovation",
     category: "Commercial",
-    image: "/placeholder.svg?height=300&width=400&text=Eco-Friendly+Office",
+    image: [
+      "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+      "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+    ],
     year: 2021,
   },
   {
@@ -62,7 +72,10 @@ const projects: Project[] = [
     title: "Historic Building Renovation",
     description: "Historic Building Renovation",
     category: "Restoration",
-    image: "/placeholder.svg?height=300&width=400&text=Historic+Renovation",
+    image: [
+      "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+      "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+    ],
     year: 2020,
   },
   {
@@ -70,7 +83,10 @@ const projects: Project[] = [
     title: "Sustainable Community Center",
     description: "Historic Building Renovation",
     category: "Public",
-    image: "/placeholder.svg?height=300&width=400&text=Community+Center",
+    image: [
+      "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+      "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+    ],
     year: 2022,
   },
   {
@@ -78,7 +94,10 @@ const projects: Project[] = [
     title: "Luxury Hotel Design",
     description: "Historic Building Renovation",
     category: "Hospitality",
-    image: "/placeholder.svg?height=300&width=400&text=Luxury+Hotel",
+    image: [
+      "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+      "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+    ],
     year: 2023,
   },
 ];
@@ -240,20 +259,23 @@ export default function PortfolioPage() {
                 height={300}
                 className="w-full h-48 object-cover"
               /> */}
-              <Carousel className="mb-4">
+              <Carousel className="mb-4 relative">
                 <CarouselContent>
-                  <CarouselItem>
-                    <Image
-                      src={project.image || "/placeholder.svg"}
-                      alt={`image`}
-                      width={400}
-                      height={300}
-                      className="w-full rounded-lg object-cover"
-                    />
-                  </CarouselItem>
+                  {project.image.map((img, index) => (
+                    <CarouselItem key={index}>
+                      <Image
+                        src={img || "/placeholder.svg"}
+                        alt={`image-${index}`}
+                        width={400}
+                        height={300}
+                        className="w-full h-[230px] rounded-lg object-cover"
+                      />
+                    </CarouselItem>
+                  ))}
                 </CarouselContent>
-                <CarouselPrevious className="absolute left-4 top-40 -translate-y-1/2 z-10" />
-                <CarouselNext className="absolute right-4 top-40 -translate-y-1/2 z-10" />
+
+                <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-50 cursor-pointer" />
+                <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-50 cursor-pointer" />
               </Carousel>
               <CardContent className="p-4">
                 <h2 className="text-xl font-semibold mb-2">{project.title}</h2>
