@@ -3,7 +3,7 @@
 import { DialogFooter } from "@/components/ui/dialog";
 
 import type React from "react";
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -311,8 +311,8 @@ const allProjects = [
 
 function Dashboard() {
   const router = useRouter();
-  // const searchParams = useSearchParams();
-  // const tab = searchParams.get("tab");
+  const searchParams = useSearchParams();
+  const tab = searchParams.get("tab");
   const { user, loading, logout, updateProfilePhoto } = useAuth();
   const [activeTab, setActiveTab] = useState( "studio");
   const [searchTerm, setSearchTerm] = useState("");
@@ -937,6 +937,7 @@ function Dashboard() {
     const years = [2021, 2022, 2023];
 
     return (
+      
       <div className="space-y-3 w-full">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold"></h2>
@@ -966,6 +967,7 @@ function Dashboard() {
           onAddProject={() => setShowProjectForm(true)}
         />
       </div>
+     
     );
   };
 
@@ -2034,6 +2036,7 @@ function Dashboard() {
   ]);
 
   return (
+   
     <div className="h-screen bg-background">
       <DashboardSidebar
         activeTab={activeTab}
@@ -2665,6 +2668,7 @@ function Dashboard() {
         </DialogContent>
       </Dialog>
     </div>
+
   );
 }
 

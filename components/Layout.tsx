@@ -55,8 +55,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       path: "",
       subItems: [
         { title: "News feed", path: "/media/newsfeed" },
-        { title: "Projects", path: "/media/projects" },
-        { title: "Publications", path: "/media/publications" },
+        { title: "Word Projects", path: "/media/projects" },
+        // { title: "Publications", path: "/media/publications" },
       ],
     },
     {

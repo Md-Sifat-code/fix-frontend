@@ -104,7 +104,10 @@ const projects: Project[] = [
 
 export default function PortfolioPage() {
   const [sortBy, setSortBy] = useState<"title" | "year">("title");
+  const [filterBy, setFilterBy] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [expanded, setExpanded] = useState<number | null>(null); // track expanded description per project
 
   const categories = useMemo(() => {
     return Array.from(new Set(projects.map((project) => project.category)));
@@ -120,11 +123,32 @@ export default function PortfolioPage() {
 
   const filteredAndSortedProjects = useMemo(() => {
     return projects
-      .filter(
-        (project) =>
-          selectedCategories.length === 0 ||
-          selectedCategories.includes(project.category)
-      )
+      .filter((project) => {
+        // Filter by dropdown filterBy (if set)
+        if (
+          filterBy &&
+          project.category.toLowerCase() !== filterBy.toLowerCase()
+        ) {
+          return false;
+        }
+        // Filter by selected categories checkbox (if any selected)
+        if (
+          selectedCategories.length > 0 &&
+          !selectedCategories.includes(project.category)
+        ) {
+          return false;
+        }
+        // Filter by search term in title or description (case insensitive)
+        if (searchTerm) {
+          const lowerSearch = searchTerm.toLowerCase();
+          const inTitle = project.title.toLowerCase().includes(lowerSearch);
+          const inDescription = project.description
+            ? project.description.toLowerCase().includes(lowerSearch)
+            : false;
+          if (!inTitle && !inDescription) return false;
+        }
+        return true;
+      })
       .sort((a, b) => {
         if (sortBy === "title") {
           return a.title.localeCompare(b.title);
@@ -132,63 +156,8 @@ export default function PortfolioPage() {
           return b.year - a.year;
         }
       });
-  }, [selectedCategories, sortBy]);
-
-  const [openFilters, setOpenFilters] = useState(false);
-  const [selectedBuildingTypes, setSelectedBuildingTypes] = useState<string[]>(
-    []
-  );
-  const [selectedClimates, setSelectedClimates] = useState<string[]>([]);
-
-  const buildingTypes = [
-    "Residential",
-    "Commercial",
-    "Medical",
-    "Hospitality",
-    "Additional",
-    "Remodel",
-    "Educational",
-  ];
-
-  const climates = ["Hot", "Cold", "Tropical", "Dry"];
-
-  const toggleBuildingType = (type: string) => {
-    setSelectedBuildingTypes((prev) =>
-      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
-    );
-  };
-
-  const toggleClimate = (climate: string) => {
-    setSelectedClimates((prev) =>
-      prev.includes(climate)
-        ? prev.filter((c) => c !== climate)
-        : [...prev, climate]
-    );
-  };
-
-  //  const [sortBy, setSortBy] = useState("title");
-  const [filterBy, setFilterBy] = useState("");
-  const [open, setOpen] = useState(false);
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-
-  const filterOptions = [
-    "Residential",
-    "Commercial",
-    "Medical",
-    "Hospitality",
-    "Additional",
-    "Remodel",
-    "Educational",
-  ];
-
-  const toggleFilter = (option: string) => {
-    setSelectedFilters((prev) =>
-      prev.includes(option)
-        ? prev.filter((f) => f !== option)
-        : [...prev, option]
-    );
-  };
-  const [expanded, setExpanded] = useState(false);
+  }, [filterBy, searchTerm, selectedCategories, sortBy]);
+  // const [expanded, setExpanded] = useState(false);
   return (
     <Layout>
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -206,9 +175,11 @@ export default function PortfolioPage() {
               <path d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z"></path>
             </svg>
             <input
-              type="email"
+              type="text" // change from email to text
               placeholder="Search Something....."
               className="w-full outline-none bg-transparent text-gray-600 text-sm"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
           {/* sort by  year */}
@@ -225,25 +196,39 @@ export default function PortfolioPage() {
 
             <div className="flex gap-4 w-full">
               {/* Filter Dropdown */}
-              <div className="relative w-full">
+              <div className="relative w-1/4">
                 <select
                   value={filterBy}
                   onChange={(e) => setFilterBy(e.target.value)}
                   className="w-full bg-black appearance-none outline-none text-white border cursor-pointer py-3 px-6 pr-10 rounded text-sm"
                 >
-                  <option value="">Filter</option>
-                  <option value="residential">Residential</option>
-                  <option value="commercial">Commercial</option>
-                  <option value="medical">Medical</option>
-                  <option value="hospitality">Hospitality</option>
-                  <option value="additional">Additional</option>
-                  <option value="remodel">Remodel</option>
-                  <option value="educational">Educational</option>
+                  <option value="">Filter by Category</option>
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat.toLowerCase()}>
+                      {cat}
+                    </option>
+                  ))}
                 </select>
-
-                {/* Filter Icon */}
                 <Filter className="absolute right-3 top-1/2 -translate-y-1/2 text-white w-4 h-4 pointer-events-none" />
               </div>
+              {/* -------------------  */}
+              {/* Optional: Checkbox category filter */}
+              {/* <div className="mb-8 flex flex-wrap gap-4">
+                {categories.map((category) => (
+                  <label
+                    key={category}
+                    className="inline-flex items-center cursor-pointer space-x-2"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedCategories.includes(category)}
+                      onChange={() => handleCategoryChange(category)}
+                      className="cursor-pointer"
+                    />
+                    <span>{category}</span>
+                  </label>
+                ))}
+              </div> */}
             </div>
           </div>
           {/* filter by category */}
@@ -286,7 +271,7 @@ export default function PortfolioPage() {
                 >
                   <strong></strong> {project.description}
                   <button
-                    onClick={() => setExpanded(!expanded)}
+                    // onClick={() => setExpanded(!expanded)}
                     className="text-blue-500 text-sm ml-2 hover:underline"
                   >
                     {expanded ? "Read less" : "Read more"}

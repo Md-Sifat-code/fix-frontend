@@ -219,7 +219,11 @@ export function ProfileSettings() {
           </Button>
           <h1 className="text-3xl font-bold">Profile Settings</h1>
         </div>
-        <Button variant="outline" onClick={handleLogout}>
+        <Button
+          variant="outline"
+          onClick={handleLogout}
+          className="dark:border-white dark:text-white dark:hover:bg-gray-800"
+        >
           <LogOut className="mr-2 h-4 w-4" />
           Sign out
         </Button>

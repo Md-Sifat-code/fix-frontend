@@ -18,7 +18,13 @@ import { ProjectDetails } from "@/components/ProjectDetails";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import dynamic from "next/dynamic";
 import { Project } from "@/types/Project";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import Image from "next/image";
 
 const MapFilter = dynamic(() => import("@/components/MapFilter"), {
@@ -28,6 +34,7 @@ const MapFilter = dynamic(() => import("@/components/MapFilter"), {
 export default function MediaProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [votes, setVotes] = useState<{ [key: string]: number }>({});
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const storedVotes = localStorage.getItem("projectVotes");
@@ -71,9 +78,10 @@ export default function MediaProjectsPage() {
       {
         id: "1",
         name: "Tropical Villa",
-        description:
-          "A beautiful villa designed for tropical climate. ",
-        images: ["https://via.placeholder.com/600x400"],
+        description: "A beautiful villa designed for tropical climate. ",
+        images: [
+          "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+        ],
         location: "Phuket",
         continent: "Asia",
         year: 2022,
@@ -93,9 +101,10 @@ export default function MediaProjectsPage() {
       {
         id: "2",
         name: "Desert House",
-        description:
-          "An innovative design for desert climate. ",
-        images: ["https://via.placeholder.com/600x400"],
+        description: "An innovative design for desert climate. ",
+        images: [
+          "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+        ],
         location: "Phoenix",
         continent: "North America",
         year: 2019,
@@ -162,33 +171,42 @@ export default function MediaProjectsPage() {
     setSelectedYearRange(range);
   };
 
-  const filteredProjects = useMemo(() => {
-    return projects.filter((project) => {
-      const climateMatch =
-        !selectedClimate || project.climate === selectedClimate;
-      const styleMatch =
-        selectedStyles.length === 0 || selectedStyles.includes(project.style);
-      const buildingTypeMatch =
-        selectedBuildingTypes.length === 0 ||
-        selectedBuildingTypes.includes(project.buildingType);
-      const yearMatch =
-        project.year >= selectedYearRange[0] &&
-        project.year <= selectedYearRange[1];
-      return (
-        climateMatch &&
-        styleMatch &&
-        buildingTypeMatch &&
-        yearMatch &&
-        project.approved
-      );
-    });
-  }, [
-    selectedClimate,
-    selectedStyles,
-    selectedBuildingTypes,
-    selectedYearRange,
-    projects,
-  ]);
+const filteredProjects = useMemo(() => {
+  return projects.filter((project) => {
+    const climateMatch =
+      !selectedClimate || project.climate === selectedClimate;
+    const styleMatch =
+      selectedStyles.length === 0 || selectedStyles.includes(project.style);
+    const buildingTypeMatch =
+      selectedBuildingTypes.length === 0 ||
+      selectedBuildingTypes.includes(project.buildingType);
+    const yearMatch =
+      project.year >= selectedYearRange[0] &&
+      project.year <= selectedYearRange[1];
+
+    const searchMatch =
+      searchQuery.trim() === "" ||
+      project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return (
+      climateMatch &&
+      styleMatch &&
+      buildingTypeMatch &&
+      yearMatch &&
+      searchMatch && // <-- include this
+      project.approved
+    );
+  });
+}, [
+  selectedClimate,
+  selectedStyles,
+  selectedBuildingTypes,
+  selectedYearRange,
+  searchQuery, // <-- dependency added
+  projects,
+]);
+
 
   const sortedProjects = useMemo(() => {
     const sorted = [...filteredProjects].sort((a, b) => {
@@ -212,65 +230,64 @@ export default function MediaProjectsPage() {
   return (
     <Layout>
       <div className="max-w-7xl mx-auto px-4 py-8">
-       <div className="flex  flex-coll flex-row justify-between mb-4 ">
-         <h1 className="text-3xl font-light ">Featured Projects</h1>
+        <div className="flex  flex-coll flex-row justify-between mb-4 ">
+          <h1 className="text-3xl font-light ">Featured Projects</h1>
           <div className="flex px-4 py-3 rounded-md border-2 border-[#CC3F3A] overflow-hidden w-1/3">
             <Search className="text-[#CC3F3A] mr-3 rotate-90" size={16} />
             <input
-              type="email"
+              type="text"
               placeholder="Search media..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full outline-none bg-transparent text-[#CC3F3A] placeholder-[#CC3F3A] text-lg"
             />
           </div>
-       </div>
+        </div>
 
         {/* 🌍 Interactive Map Filter */}
         <MapFilter projects={filteredProjects} />
 
         {/* Sidebar Filters and Sorting */}
         <div className="mb-8  flex justify-end items-start gap-4  ">
-        
-
-        <div className="mb-4">
+          <div className="mb-4">
             <Select
-            value={sortBy}
-            onValueChange={(value: "name" | "year" | "continent") =>
-              setSortBy(value)
-            }
-          >
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="name">Sort by Name</SelectItem>
-              <SelectItem value="year">Sort by Year</SelectItem>
-              <SelectItem value="continent">Sort by Continent</SelectItem>
-            </SelectContent>
-          </Select>
-        <div className=" mt-4 flex justify-end">
+              value={sortBy}
+              onValueChange={(value: "name" | "year" | "continent") =>
+                setSortBy(value)
+              }
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="name">Sort by Name</SelectItem>
+                <SelectItem value="year">Sort by Year</SelectItem>
+                <SelectItem value="continent">Sort by Continent</SelectItem>
+              </SelectContent>
+            </Select>
+            <div className=" mt-4 flex justify-end">
               <SidebarFilter
-            climates={climates}
-            selectedClimate={selectedClimate}
-            handleClimateChange={handleClimateChange}
-            selectedStyles={selectedStyles}
-            handleStyleChange={handleStyleChange}
-            allStyles={allStyles}
-            buildingTypes={Array.from(
-              new Set(projects.map((p) => p.buildingType))
-            )}
-            selectedBuildingTypes={selectedBuildingTypes}
-            handleBuildingTypeChange={handleBuildingTypeChange}
-            yearRange={[
-              Math.min(...projects.map((p) => p.year)),
-              Math.max(...projects.map((p) => p.year)),
-            ]}
-            selectedYearRange={selectedYearRange}
-            handleYearRangeChange={handleYearRangeChange}
-            projects={projects}
-          />
-        </div>
-        </div>
-    
+                climates={climates}
+                selectedClimate={selectedClimate}
+                handleClimateChange={handleClimateChange}
+                selectedStyles={selectedStyles}
+                handleStyleChange={handleStyleChange}
+                allStyles={allStyles}
+                buildingTypes={Array.from(
+                  new Set(projects.map((p) => p.buildingType))
+                )}
+                selectedBuildingTypes={selectedBuildingTypes}
+                handleBuildingTypeChange={handleBuildingTypeChange}
+                yearRange={[
+                  Math.min(...projects.map((p) => p.year)),
+                  Math.max(...projects.map((p) => p.year)),
+                ]}
+                selectedYearRange={selectedYearRange}
+                handleYearRangeChange={handleYearRangeChange}
+                projects={projects}
+              />
+            </div>
+          </div>
         </div>
         {/* <h2 className="text-xl font-bold mb-4">
           🏆 Top 10 Projects of {new Date().getFullYear()}
@@ -285,21 +302,25 @@ export default function MediaProjectsPage() {
             </div>
           ))}
         </div>
-          <div className="mb-6 ">
-            <button className="px-6 py-3  bg-white border-2 mr-4 text-black text-xl font-bold border-black hover:bg-black hover:text-white rounded-lg">Top 10</button>
-            <button className="px-6 py-3  bg-white border-2 text-black text-xl font-bold border-black hover:bg-black hover:text-white rounded-lg">All Projects</button>
-             </div>
+        <div className="mb-6 ">
+          <button className="px-6 py-3  bg-white border-2 mr-4 text-black text-xl font-bold border-black hover:bg-black hover:text-white rounded-lg">
+            Top 10
+          </button>
+          <button className="px-6 py-3  bg-white border-2 text-black text-xl font-bold border-black hover:bg-black hover:text-white rounded-lg">
+            All Projects
+          </button>
+        </div>
         {/* Project Grid */}
         <p className="text-sm text-gray-500 mb-4">
           Showing {sortedProjects.length} of {filteredProjects.length} projects
         </p>
 
         <div className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
             {sortedProjects.map((project) => (
               <Card
                 key={project.id}
-                className="overflow-hidden cursor-pointer"
+                className="overflow-hidden cursor-pointer "
                 onClick={() => setSelectedProject(project)}
               >
                 {/* <img
@@ -309,25 +330,25 @@ export default function MediaProjectsPage() {
                   height={400}
                   className="w-full h-64 object-cover"
                 /> */}
-                 <div className="md:w-1/2">
-                <Carousel className="mb-4">
-                  <CarouselContent>
-                    {project.images.map((image, index) => (
-                      <CarouselItem key={index}>
-                        <Image
-                          src={image || "/placeholder.svg"}
-                          alt={`image`}
-                          width={400}
-                          height={300}
-                          className="w-full rounded-lg object-cover"
-                        />
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent >
-                  <CarouselPrevious  className="absolute left-4 top-40 -translate-y-1/2 z-10" />
-                  <CarouselNext  className="absolute -right-72 top-40 -translate-y-1/2 z-10" />
-                </Carousel>
-              </div>
+                <div className="w-full bg-pink-700">
+                  <Carousel className="mb-4 w-full">
+                    <CarouselContent>
+                      {project.images.map((image, index) => (
+                        <CarouselItem key={index}>
+                          <Image
+                            src={image || "/placeholder.svg"}
+                            alt={`image`}
+                            width={400}
+                            height={300}
+                            className="w-full h-full rounded-lg object-cover"
+                          />
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="absolute left-4 top-40 -translate-y-1/2 z-10" />
+                    <CarouselNext className="absolute -right-72 top-40 -translate-y-1/2 z-10" />
+                  </Carousel>
+                </div>
                 <CardContent className="p-6">
                   <h2 className="text-xl font-semibold mb-2">
                     {project.name} kk
@@ -337,15 +358,18 @@ export default function MediaProjectsPage() {
                       expanded ? "" : "truncate"
                     }`}
                   >
-                    <strong>Architect:</strong> {project.description} <span>   <button
-                    onClick={() => setExpanded(!expanded)}
-                    className="text-blue-500 text-sm mb-2 hover:underline"
-                  >
-                    {expanded ? "Read less" : "Read more"}
-                  </button></span>
+                    <strong>Architect:</strong> {project.description}{" "}
+                    <span>
+                      {" "}
+                      <button
+                        onClick={() => setExpanded(!expanded)}
+                        className="text-blue-500 text-sm mb-2 hover:underline"
+                      >
+                        {expanded ? "Read less" : "Read more"}
+                      </button>
+                    </span>
                   </p>
 
-               
                   <div className=" text-sm text-gray-500 mb-4">
                     <h2>Photographer :{project.Photographer}</h2>
                     <div>
@@ -432,12 +456,13 @@ export default function MediaProjectsPage() {
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-center items-center space-x-2">
+          <div className="flex justify-center items-center space-x-2 ">
             <Button
               variant="outline"
               size="sm"
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
+              className="cursor-pointer"
             >
               <ChevronLeft className="h-4 w-4" />
               Previous
@@ -448,6 +473,7 @@ export default function MediaProjectsPage() {
             <Button
               variant="outline"
               size="sm"
+              className="cursor-pointer"
               onClick={() =>
                 setCurrentPage((prev) => Math.min(prev + 1, totalPages))
               }
