@@ -558,6 +558,7 @@ export default function NewProposalPage({
 
   const finalCost = totalCost - calculateTotalCredits();
   const [signature, setSignature] = useState("");
+  const [signatureAr, setSignatureAr] = useState("");
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -582,7 +583,7 @@ export default function NewProposalPage({
                 onClick={() => setActiveStep("client")}
               >
                 <FileText className="h-4 w-4 mr-2" />
-                Proposal Details hhhhhhhhhhhh
+                Proposal Details 
               </Button>
               <Button
                 variant={activeStep === "services" ? "default" : "outline"}
@@ -1838,13 +1839,13 @@ export default function NewProposalPage({
                       className="mt-2"
                       onClick={() => clearSignature(clientSignatureRef)}
                     >
-                      Clear
+                      Clear 
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
                       className="mt-2"
-                      // onClick={() => clearSignature(clientSignatureRef)}
+                      onClick={() => clearSignature(clientSignatureRef)}
                     >
                       Sign
                     </Button>
@@ -1866,13 +1867,13 @@ export default function NewProposalPage({
                       <input
                         type="text"
                         placeholder="Type your name"
-                        value={signature}
-                        onChange={(e) => setSignature(e.target.value)}
+                        value={signatureAr}
+                        onChange={(e) => setSignatureAr(e.target.value)}
                         className="border border-gray-300 rounded px-3 py-2 font-cursive text-lg"
                       />
 
                       {/* Show warning if empty */}
-                      {signature.trim() === "" && (
+                      {signatureAr.trim() === "" && (
                         <p className="text-gray-400">
                           Client's signature required
                         </p>

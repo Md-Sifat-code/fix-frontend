@@ -19,6 +19,7 @@ export function ScheduleAppointmentSection({
   formData,
   updateFormData,
   goToNextSection,
+    goToPreviousSection,
 }) {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
     formData.appointmentDate ? new Date(formData.appointmentDate) : undefined
@@ -218,6 +219,18 @@ export function ScheduleAppointmentSection({
             placeholder="Any specific topics you'd like to discuss or questions you have for the architect?"
           />
         </div>
+      </div>
+         <div>
+          <Button
+    type="button"
+    variant="outline"
+    onClick={() => {
+     // save current form data
+      goToPreviousSection()
+    }}
+  >
+    Previous
+  </Button>
       </div>
       <div className="flex justify-center mt-8">
         <ThumbprintButton onClick={goToNextSection} text="Review & Confirm" />

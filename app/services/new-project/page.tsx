@@ -84,6 +84,12 @@ export default function NewProjectPage() {
     }
   }
 
+    const goToPreviousSection = () => {
+    if (activeSection > 0) {
+      setActiveSection(activeSection - 1)
+    }
+  }
+
   return (
     <Layout>
       <div className="min-h-screen bg-background text-foreground">
@@ -139,6 +145,7 @@ export default function NewProjectPage() {
                       formData={formData}
                       updateFormData={updateFormData}
                       goToNextSection={() => setActiveSection(2)}
+                      goToPreviousSection={goToPreviousSection} 
                     />
                   )}
                   {activeSection === 2 && (
@@ -146,6 +153,7 @@ export default function NewProjectPage() {
                       formData={formData}
                       updateFormData={updateFormData}
                       goToNextSection={() => setActiveSection(3)}
+                       goToPreviousSection={goToPreviousSection}
                     />
                   )}
                   {activeSection === 3 && (
@@ -153,6 +161,7 @@ export default function NewProjectPage() {
                       formData={formData}
                       updateFormData={updateFormData}
                       goToNextSection={() => setActiveSection(4)}
+                       goToPreviousSection={goToPreviousSection}
                     />
                   )}
                   {activeSection === 4 && (
@@ -160,6 +169,7 @@ export default function NewProjectPage() {
                       formData={formData}
                       updateFormData={updateFormData}
                       onPaymentSuccess={() => setPaymentSuccessful(true)}
+                       
                     />
                   )}
                 </div>

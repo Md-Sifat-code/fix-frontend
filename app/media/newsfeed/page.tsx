@@ -11,6 +11,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Search } from "lucide-react";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 interface NewsItem {
   id: number;
@@ -42,9 +44,9 @@ const featuredProject: FeaturedProject = {
   summary:
     "A stunning waterfront structure that seamlessly blends with its environment, showcasing innovative use of sustainable materials and cutting-edge design techniques. This project of the month exemplifies the future of adaptive architecture, responding to both environmental and social needs of urban spaces.",
   images: [
-    "/placeholder.svg?height=400&width=600&text=Floating+Pavilion+1",
-    "/placeholder.svg?height=400&width=600&text=Floating+Pavilion+2",
-    "/placeholder.svg?height=400&width=600&text=Floating+Pavilion+3",
+    "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+    "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+    "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
   ],
 };
 
@@ -55,7 +57,7 @@ const newsItems: NewsItem[] = [
     date: "June 15, 2023",
     summary:
       "Our eco-friendly office complex project receives recognition for innovative sustainable design.",
-    image: "/placeholder.svg?height=100&width=100&text=Award",
+    image: "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
     source: "Architectural Digest",
   },
   {
@@ -64,7 +66,7 @@ const newsItems: NewsItem[] = [
     date: "June 10, 2023",
     summary:
       "We're partnering with the city to develop a new community-focused urban renewal project.",
-    image: "/placeholder.svg?height=100&width=100&text=Urban+Planning",
+    image: "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
     source: "CityLab",
   },
   {
@@ -73,7 +75,7 @@ const newsItems: NewsItem[] = [
     date: "June 5, 2023",
     summary:
       "Explore our modern approach to home design in our recently completed residential project.",
-    image: "/placeholder.svg?height=100&width=100&text=Residential",
+    image: "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
     source: "Dwell Magazine",
   },
   {
@@ -82,7 +84,7 @@ const newsItems: NewsItem[] = [
     date: "May 28, 2023",
     summary:
       "We're excited to welcome new talent to our growing team of architects and designers.",
-    image: "/placeholder.svg?height=100&width=100&text=Team",
+    image: "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
     source: "Architect Magazine",
   },
   {
@@ -91,12 +93,22 @@ const newsItems: NewsItem[] = [
     date: "May 20, 2023",
     summary:
       "Join us for an insightful discussion on the future trends in sustainable architectural design.",
-    image: "/placeholder.svg?height=100&width=100&text=Webinar",
+    image: "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
     source: "ArchDaily",
   },
 ];
 
 export default function NewsfeedPage() {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Filter newsItems based on search term
+  const filteredNews = newsItems.filter(
+    (news) =>
+      news.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      news.summary.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      news.source.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <Layout>
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -104,10 +116,12 @@ export default function NewsfeedPage() {
           {/* search bar  */}
           <div className="flex px-4 py-3 rounded-md border-2 border-[#CC3F3A] overflow-hidden w-full">
             <Search className="text-[#CC3F3A] mr-3 rotate-90" size={16} />
-            <input
-              type="email"
+                  <input
+              type="text"
               placeholder="Search media..."
               className="w-full outline-none bg-transparent text-[#CC3F3A] placeholder-[#CC3F3A] text-lg"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
         </div>
@@ -153,7 +167,7 @@ export default function NewsfeedPage() {
 
         <h2 className="text-2xl font-light mb-6">Latest News</h2>
         <div className="space-y-10 ">
-          {newsItems.map((news) => (
+          {filteredNews.map((news) => (
             <Card key={news.id}>
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
@@ -162,7 +176,7 @@ export default function NewsfeedPage() {
                     alt={news.title}
                     width={100}
                     height={100}
-                    className="rounded-lg object-cover"
+                    className="rounded-lg object-cover h-32"
                   />
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">

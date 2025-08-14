@@ -14,6 +14,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { ThumbprintButton } from "@/components/ThumbprintButton";
 import Image from "next/image";
+import { Button } from "../ui/button";
 
 // Array of all U.S. states
 const usStates = [
@@ -291,6 +292,7 @@ export function ProjectDetailsSection({
   formData,
   updateFormData,
   goToNextSection,
+  goToPreviousSection
 }) {
   const [sameAsMailingAddress, setSameAsMailingAddress] = React.useState(false);
 
@@ -758,6 +760,17 @@ export function ProjectDetailsSection({
             />
           </div>
         </div>
+           <div className="mt-4">
+                  <Button
+            type="button"
+            variant="outline"
+            onClick={() => {
+              goToPreviousSection()
+            }}
+          >
+            Previous
+          </Button>
+              </div>
       </div>
 
       <div className="flex justify-center mt-8">

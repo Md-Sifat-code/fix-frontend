@@ -445,11 +445,13 @@ function ProjectsTable({
         <TableHeader>
           <TableRow>
             <TableHead>Project</TableHead>
-            <TableHead>Client </TableHead>
-            <TableHead>Project Manager</TableHead>
+            <TableHead>Project location </TableHead>
+            <TableHead>Project Type</TableHead>
+            <TableHead>Client</TableHead>
+            {/* <TableHead>Client</TableHead> */}
+            <TableHead>Consultation Date</TableHead>
             <TableHead>Stage</TableHead>
-            <TableHead>Phase</TableHead>
-            <TableHead>Progress</TableHead>
+            <TableHead className="text-right">Progress</TableHead>
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
@@ -556,6 +558,10 @@ function ProjectsTable({
                     <span className="text-xs text-gray-500">N/A</span>
                   )}
                 </TableCell>
+                <TableCell className="text-right">
+                dcfc
+                </TableCell>
+              
                 <TableCell className="text-right">
                   <Link href={`/projects/${project.id}`}>
                     <Button variant="outline" size="sm">

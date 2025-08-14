@@ -292,17 +292,17 @@ export function ActiveStage({ project, onProjectUpdate, usedFallback = false }: 
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 ">
         <div className="lg:col-span-2 space-y-6">
           <Card className="overflow-hidden">
             <CardHeader>
-              <CardTitle>Project Tasks</CardTitle>
+              <CardTitle>Project Tasks </CardTitle>
               <CardDescription>Overall completion: {getProjectProgress()}%</CardDescription>
             </CardHeader>
             <div className="w-full bg-gray-200 h-2">
               <div className="h-2 bg-green-600" style={{ width: `${getProjectProgress()}%` }}></div>
             </div>
-            <CardContent className="p-0 pt-6">
+            <CardContent className=" pt-6   p-0 overflow-y-scroll h-[500px]">
               <div className="space-y-8">
                 {objectives.map((objective) => (
                   <div key={objective.id} className="border rounded-lg overflow-hidden bg-white shadow-sm">

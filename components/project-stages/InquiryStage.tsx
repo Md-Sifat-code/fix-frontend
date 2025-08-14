@@ -9,6 +9,7 @@ import { useToast } from "@/components/ui/use-toast"
 import type { Project } from "@/services/projects-service"
 import { formatDate } from "@/lib/utils"
 import { useRouter } from "next/navigation"
+import Swal from 'sweetalert2'
 
 interface InquiryStageProps {
   project: Project
@@ -72,15 +73,64 @@ export function InquiryStage({ project, onProjectUpdate, usedFallback = false }:
 
     onProjectUpdate(updatedProject)
   }
+ 
+  // hendel delete 
+ const handleDelete = async () => {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this inquiry deletion!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    })
+
+    if (result.isConfirmed) {
+      if (usedFallback) {
+        // Demo mode: just show a toast
+        toast({
+          title: "Demo Mode",
+          description: "Inquiry deleted (demo only)",
+        })
+        // Optionally simulate deletion by calling onProjectUpdate(null)
+        onProjectUpdate(null)
+        return
+      }
+
+      try {
+        // TODO: Call your API or delete logic here.
+        // Example: await deleteInquiryAPI(project.id)
+        
+        // After successful delete:
+        toast({
+          title: "Deleted!",
+          description: "Inquiry has been deleted successfully.",
+        })
+        onProjectUpdate(null) // inform parent the project is deleted
+
+        // Optionally navigate away if needed
+        router.push("/projects") // or another page
+
+      } catch (error) {
+        toast({
+          title: "Error",
+          description: "Failed to delete inquiry. Please try again.",
+          variant: "destructive"
+        })
+      }
+    }
+  }
 
   return (
     <div className="container mx-auto py-8 px-4">
       <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold">{project.name}</h1>
+         
           <div className="flex items-center mt-2 space-x-2">
             <Badge variant="outline" className="text-blue-600 bg-blue-50 hover:bg-blue-100">
-              Inquiry Stage hhhj
+              Inquiry Stage 
             </Badge>
             {isConsultationCompleted ? (
               <Badge variant="outline" className="text-green-600 bg-green-50 hover:bg-green-100">
@@ -95,7 +145,9 @@ export function InquiryStage({ project, onProjectUpdate, usedFallback = false }:
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
-          <button className="px-6 py-1.5 bg-red-800 text-white rounded-md">Delete Inquiry</button>
+          <button 
+           onClick={handleDelete}
+           className="px-6 py-1.5 bg-red-800 text-white rounded-md">Delete Inquiry  </button>
           {!isConsultationCompleted ? (
             <Button onClick={handleMarkConsultationComplete} className="bg-green-600 hover:bg-green-700 text-white">
               <CheckCircle className="mr-2 h-4 w-4" />
