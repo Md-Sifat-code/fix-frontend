@@ -17,6 +17,7 @@ import {
 import { Loader2 } from "lucide-react"
 
 export function ReviewConfirmSection({ formData, updateFormData, onPaymentSuccess }) {
+  console.log("formData in ReviewConfirmSection:", formData)
   const [paymentMethod, setPaymentMethod] = useState("")
   const [paymentDetails, setPaymentDetails] = useState<PaymentDetails>({
     paymentMethod: "",

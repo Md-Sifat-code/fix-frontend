@@ -25,8 +25,11 @@ export default function ProfileManager() {
     const loadProfiles = async () => {
       try {
         setLoading(true)
+        // const data = await profilesApi.getAll()
+        // setProfiles(data)
         const data = await profilesApi.getAll()
-        setProfiles(data)
+setProfiles(Array.isArray(data) ? data : [])
+        console.log(data);
       } catch (err: any) {
         console.error("Error loading profiles:", err)
         setError(err.message || "Failed to load profiles")

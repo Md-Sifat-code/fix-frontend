@@ -121,12 +121,38 @@ export default function MediaProjectsPage() {
         lng: -112.074,
         Photographer: "cupper tom",
       },
+      {
+        id: "3",
+        name: "Desert House",
+        description: "An innovative design for desert climate. ",
+        images: [
+          "https://res.cloudinary.com/dy0b6hvog/image/upload/v1755015665/istockphoto-2179523209-2048x2048_a6ytef.jpg",
+        ],
+        location: "Phoenix",
+        continent: "North America",
+        year: 2019,
+        climate: "Desert",
+        style: "Minimalist",
+        buildingType: "House",
+        tags: ["solar-powered"],
+        approved: true,
+        title: "Desert House",
+        country: "USA",
+        type: "Residential",
+        stage: "completed",
+        lat: 33.4484,
+        lng: -112.074,
+        Photographer: "cupper tom",
+      },
       // Add more projects here...
     ];
     setProjects(exampleProjects);
   }, []);
 
-  const [sortBy, setSortBy] = useState<"name" | "year" | "continent">("name");
+  // const [sortBy, setSortBy] = useState<"name" | "year" | "continent">("name");
+  const [sortBy, setSortBy] = useState<
+    "country-asc" | "country-desc" | "year-desc" | "year-asc"
+  >("country-asc");
   const [selectedClimate, setSelectedClimate] = useState<string | null>(null);
   const [expanded, setExpanded] = useState(false);
 
@@ -171,53 +197,54 @@ export default function MediaProjectsPage() {
     setSelectedYearRange(range);
   };
 
-const filteredProjects = useMemo(() => {
-  return projects.filter((project) => {
-    const climateMatch =
-      !selectedClimate || project.climate === selectedClimate;
-    const styleMatch =
-      selectedStyles.length === 0 || selectedStyles.includes(project.style);
-    const buildingTypeMatch =
-      selectedBuildingTypes.length === 0 ||
-      selectedBuildingTypes.includes(project.buildingType);
-    const yearMatch =
-      project.year >= selectedYearRange[0] &&
-      project.year <= selectedYearRange[1];
+  const filteredProjects = useMemo(() => {
+    return projects.filter((project) => {
+      const climateMatch =
+        !selectedClimate || project.climate === selectedClimate;
+      const styleMatch =
+        selectedStyles.length === 0 || selectedStyles.includes(project.style);
+      const buildingTypeMatch =
+        selectedBuildingTypes.length === 0 ||
+        selectedBuildingTypes.includes(project.buildingType);
+      const yearMatch =
+        project.year >= selectedYearRange[0] &&
+        project.year <= selectedYearRange[1];
 
-    const searchMatch =
-      searchQuery.trim() === "" ||
-      project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchQuery.toLowerCase());
+      const searchMatch =
+        searchQuery.trim() === "" ||
+        project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        project.description.toLowerCase().includes(searchQuery.toLowerCase());
 
-    return (
-      climateMatch &&
-      styleMatch &&
-      buildingTypeMatch &&
-      yearMatch &&
-      searchMatch && // <-- include this
-      project.approved
-    );
-  });
-}, [
-  selectedClimate,
-  selectedStyles,
-  selectedBuildingTypes,
-  selectedYearRange,
-  searchQuery, // <-- dependency added
-  projects,
-]);
-
+      return (
+        climateMatch &&
+        styleMatch &&
+        buildingTypeMatch &&
+        yearMatch &&
+        searchMatch && // <-- include this
+        project.approved
+      );
+    });
+  }, [
+    selectedClimate,
+    selectedStyles,
+    selectedBuildingTypes,
+    selectedYearRange,
+    searchQuery, // <-- dependency added
+    projects,
+  ]);
 
   const sortedProjects = useMemo(() => {
     const sorted = [...filteredProjects].sort((a, b) => {
-      if (sortBy === "name") return a.name.localeCompare(b.name);
-      if (sortBy === "year") return b.year - a.year;
-      return a.continent.localeCompare(b.continent);
+      if (sortBy === "country-asc") return a.country.localeCompare(b.country);
+      if (sortBy === "country-desc") return b.country.localeCompare(a.country);
+      if (sortBy === "year-desc") return b.year - a.year;
+      if (sortBy === "year-asc") return a.year - b.year;
+      return 0;
     });
+
     const startIndex = (currentPage - 1) * projectsPerPage;
     return sorted.slice(startIndex, startIndex + projectsPerPage);
-  }, [filteredProjects, sortBy, currentPage]);
-
+  }, [filteredProjects, sortBy, currentPage, projectsPerPage]);
   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
   const currentYear = new Date().getFullYear();
 
@@ -231,7 +258,7 @@ const filteredProjects = useMemo(() => {
     <Layout>
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex  flex-coll flex-row justify-between mb-4 ">
-          <h1 className="text-3xl font-light ">Featured Projects</h1>
+          <h1 className="text-3xl font-light ">Featured Projects </h1>
           <div className="flex px-4 py-3 rounded-md border-2 border-[#CC3F3A] overflow-hidden w-1/3">
             <Search className="text-[#CC3F3A] mr-3 rotate-90" size={16} />
             <input
@@ -252,17 +279,20 @@ const filteredProjects = useMemo(() => {
           <div className="mb-4">
             <Select
               value={sortBy}
-              onValueChange={(value: "name" | "year" | "continent") =>
-                setSortBy(value)
-              }
+              onValueChange={(
+                value: "country-asc" | "country-desc" | "year-desc" | "year-asc"
+              ) => setSortBy(value)}
             >
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[220px]">
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="name">Sort by Name</SelectItem>
-                <SelectItem value="year">Sort by Year</SelectItem>
-                <SelectItem value="continent">Sort by Continent</SelectItem>
+                <SelectItem value="country-asc">Country (A → Z)</SelectItem>
+                <SelectItem value="country-desc">Country (Z → A)</SelectItem>
+                <SelectItem value="year-desc">
+                  Year (Recent → Oldest)
+                </SelectItem>
+                <SelectItem value="year-asc">Year (Oldest → Recent)</SelectItem>
               </SelectContent>
             </Select>
             <div className=" mt-4 flex justify-end">
@@ -316,7 +346,7 @@ const filteredProjects = useMemo(() => {
         </p>
 
         <div className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
             {sortedProjects.map((project) => (
               <Card
                 key={project.id}
@@ -330,23 +360,25 @@ const filteredProjects = useMemo(() => {
                   height={400}
                   className="w-full h-64 object-cover"
                 /> */}
-                <div className="w-full bg-pink-700">
+                <div className="w-full ">
                   <Carousel className="mb-4 w-full">
                     <CarouselContent>
                       {project.images.map((image, index) => (
                         <CarouselItem key={index}>
-                          <Image
-                            src={image || "/placeholder.svg"}
-                            alt={`image`}
-                            width={400}
-                            height={300}
-                            className="w-full h-full rounded-lg object-cover"
-                          />
+                          <div className="bg-pink-700 h-56 w-full">
+                            <Image
+                              src={image || "/placeholder.svg"}
+                              alt={`image`}
+                              width={400}
+                              height={400}
+                              className="w-full h-full rounded-lg object-cover"
+                            />
+                          </div>
                         </CarouselItem>
                       ))}
                     </CarouselContent>
-                    <CarouselPrevious className="absolute left-4 top-40 -translate-y-1/2 z-10" />
-                    <CarouselNext className="absolute -right-72 top-40 -translate-y-1/2 z-10" />
+                    <CarouselPrevious className="absolute left-4 top-28 -translate-y-1/2 z-10" />
+                    <CarouselNext className="absolute -right-0 top-28 -translate-y-1/2 z-10" />
                   </Carousel>
                 </div>
                 <CardContent className="p-6">
