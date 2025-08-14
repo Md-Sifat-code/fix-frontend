@@ -290,7 +290,7 @@ export default function ClientInfoSection({
 }: ClientInfoSectionProps) {
   const [localFormData, setLocalFormData] = useState({
     firstName: formData?.firstName || "",
-    middleName: formData?.middleInitial || "",
+     middleInitial: formData?.middleInitial || "",
     lastName: formData?.lastName || "",
     companyName: formData?.companyName || "",
     email: formData?.email || "",
@@ -358,9 +358,9 @@ export default function ClientInfoSection({
         <div className="space-y-2">
           <Label htmlFor="middleName">Middle Name</Label>
           <Input
-            id="middleName"
-            name="middleName"
-            value={localFormData.middleName}
+             id="middleInitial"
+  name="middleInitial"
+  value={localFormData.middleInitial}
             onChange={handleInputChange}
           />
         </div>
